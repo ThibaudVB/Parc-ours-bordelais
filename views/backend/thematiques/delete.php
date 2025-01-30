@@ -4,7 +4,7 @@ include '../../../header.php';
 if (isset($_GET['numThem'])) {
     $numThem = $_GET['numThem'];
     $libThem = sql_select("THEMATIQUE", "libThem", "numThem = $numThem")[0]['libThem'];
-    $fk = sql_select("thematique", "numThem", "numThem = $numThem");
+    $fk = sql_select("article", "numThem", "numThem = $numThem");
 }
 ?>
 
@@ -35,11 +35,10 @@ if (isset($_GET['numThem'])) {
                     ?>
 
                     <a href="list.php" class="btn btn-primary">List</a>
-                    <?php 
-                    if (count($fk)!=0){
+                    <?php
+                    if (count($fk) != 0) {
                         echo '<button type="submit" class="btn btn-danger" disabled> Annulation impossible</button>';
-                    }
-                    else {
+                    } else {
                         echo '<button type="submit" class="btn btn-danger">Confirmer delete ? </button>';
                     }
                     ?>
