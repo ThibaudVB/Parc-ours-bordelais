@@ -4,10 +4,8 @@ include '../../../header.php';
 if (isset($_GET['numStat'])) {
     $numStat = $_GET['numStat'];
     $libStat = sql_select("STATUT", "libStat", "numStat = $numStat")[0]['libStat'];
+    $fk = sql_select("membre", "numStat", "numStat = $numStat");
 }
-
-$fk = sql_select("membre", "numStat", "numStat = $numStat");
-
 ?>
 
 
@@ -38,10 +36,11 @@ $fk = sql_select("membre", "numStat", "numStat = $numStat");
 
                     <a href="list.php" class="btn btn-primary">List</a>
                     <?php 
-                    if (empty($fk)){
-                        echo '<button type="submit" class="btn btn-danger">Confirmer delete ? </button>';
-                    } else {
+                    if (count($fk)!=0){
                         echo '<button type="submit" class="btn btn-danger" disabled> Annulation impossible</button>';
+                    }
+                    else {
+                        echo '<button type="submit" class="btn btn-danger">Confirmer delete ? </button>';
                     }
                     ?>
                 </div>
