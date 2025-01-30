@@ -7,6 +7,10 @@ if(isset($_GET['numStat'])){
 }
 ?>
 
+<?php
+$sql "SELECT*FROM"
+?>
+
 <!-- Bootstrap form to create a new statut -->
 <div class="container">
     <div class="row">

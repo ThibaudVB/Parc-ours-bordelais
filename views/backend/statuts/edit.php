@@ -1,9 +1,6 @@
 <?php
 include '../../../header.php';
 
-echo ("Edit Statut à faire");
-
-
 if(isset($_GET['numStat'])){
     $numStat = $_GET['numStat'];
     $libStat = sql_select("STATUT", "libStat", "numStat = $numStat")[0]['libStat'];
@@ -22,7 +19,7 @@ if(isset($_GET['numStat'])){
                 <div class="form-group">
                     <label for="libStat">Nom du statut</label>
                     <input id="numStat" name="numStat" class="form-control" style="display: none" type="text" value="<?php echo($numStat); ?>" readonly="readonly" />
-                    <input id="libStat" name="libStat" class="form-control" type="text" value="<?php echo($libStat); ?>"/>
+                    <input id="libStat" name="libStat" class="form-control" type="text" value="<?php echo($libStat); ?>" />
                 </div>
                 <br />
                 <div class="form-group mt-2">
