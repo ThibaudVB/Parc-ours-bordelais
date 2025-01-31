@@ -6,6 +6,17 @@ if (isset($_GET['libThem'])) {
 }
 ?>
 
+<?php
+//$bbcode = '[url=mettre le lien]mettre le commentaire[/url]';
+//
+//$html = str_replace(
+//    ["[url=", "[/url]", "]"], 
+//    ["<a href=\"", "</a>", "\">"], 
+//    $bbcode
+//);
+//
+//echo $html;
+?>
 
 
 <!-- Bootstrap form to create a new statut -->
