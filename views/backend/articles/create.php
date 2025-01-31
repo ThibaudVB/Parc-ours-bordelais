@@ -22,6 +22,10 @@ if (isset($_GET['libThem'])) {
                 </div>
                 <br />
                 <div class="form-group">
+                    <label for="datecreation">Date de création</label>
+                    <input id="datecreation" name="datecreation" class="form-control" style="resize: vertical;" type="text" autofocus />
+                </div>
+                <div class="form-group">
                     <label for="libChapoArt">Chapô de l'article</label>
                     <input id="libChapoArt" name="libChapoArt" class="form-control" style="resize: vertical;" type="text" autofocus />
                 </div>
@@ -32,27 +36,25 @@ if (isset($_GET['libThem'])) {
                 </div>
                 <br />
                 <div class="form-group">
-                    <label for="parag1Art">Premier paragraphe de l'article</label>
+                    <label for="parag1Art">Paragraphe 1</label>
                     <textarea id="parag1Art" name="parag1Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
-                <br />
                 <div class="form-group">
-                    <label for="libSsTitr1Art">Titre du second paragraphe</label>
-                    <input id="libSsTitr1Art" name="libSsTitr1Art" class="form-control" style="resize: vertical;" type="text" autofocus />
+                    <label for="sousparag1Art">Sous titre 1</label>
+                    <textarea id="sousparag1Art" name="sousparag1Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
                 <br />
                 <div class="form-group">
-                    <label for="parag2Art">Second paragraphe de l'article</label>
+                    <label for="parag2Art">Paragraphe 2</label>
                     <textarea id="parag2Art" name="parag2Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
-                <br />
                 <div class="form-group">
-                    <label for="libSsTitr2Art">Titre du troisième paragraphe</label>
-                    <input id="libSsTitr2Art" name="libSsTitr2Art" class="form-control" style="resize: vertical;"  type="text" autofocus />
+                    <label for="sousparag2Art">Sous titre 2</label>
+                    <textarea id="sousparag2Art" name="sousparag1Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
                 <br />
                 <div class="form-group">
-                    <label for="parag3Art">Troisième paragraphe de l'article</label>
+                    <label for="parag3Art">Paragraphe 3</label>
                     <textarea id="parag3Art" name="parag3Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
                 <br />
