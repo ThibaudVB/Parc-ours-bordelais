@@ -69,11 +69,12 @@ if (isset($_GET['libThem'])) {
                 <div class="form-group">
                     <label for="numThem">Thématique de l'article</label>
                     <select class="form-select" name="numThem">
-                        <?php foreach ($thematiques as $thematique) : ?>
-                            <option value="<?php echo $thematique['numThem']; ?>">
-                                <?php echo $libThem['libThem']; ?>
-                            </option>
-                        <?php endforeach; ?>
+                    <?php
+                        $thematiques = sql_select('thematique', 'numThem, libThem');
+                        foreach ($thematiques as $thematique) {
+                            echo '<option value="' . $thematique['numThem'] . '">' . $thematique['libThem'] . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
                 <br />
