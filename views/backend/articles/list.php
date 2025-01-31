@@ -2,30 +2,30 @@
 include '../../../header.php'; // contains the header and call to config.php
 
 //Load all statuts
-$statuts = sql_select("STATUT", "*");
+$article = sql_select("ARTICLE", "*");
 ?>
 
 <!-- Bootstrap default layout to display all statuts in foreach -->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Statuts</h1>
+            <h1>Articles</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nom des statuts</th>
+                        <th>Nom des articles</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($statuts as $statut){ ?>
+                    <?php foreach($article as $article){ ?>
                         <tr>
-                            <td><?php echo($statut['numStat']); ?></td>
-                            <td><?php echo($statut['libStat']); ?></td>
+                            <td><?php echo($article['numArt']); ?></td>
+                            <td><?php echo($article['libTitrArt']); ?></td>
                             <td>
-                                <a href="edit.php?numStat=<?php echo($statut['numStat']); ?>" class="btn btn-primary">Edit</a>
-                                <a href="delete.php?numStat=<?php echo($statut['numStat']); ?>" class="btn btn-danger">Delete</a>
+                                <a href="edit.php?numArt=<?php echo($article['numArt']); ?>" class="btn btn-primary">Edit</a>
+                                <a href="delete.php?numArt=<?php echo($article['numArt']); ?>" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>
