@@ -34,7 +34,7 @@ if (isset($_GET['libThem'])) {
                 <br />
                 <div class="form-group">
                     <label for="datecreation">Date de création</label>
-                    <input id="datecreation" name="dtCreaArt" class="form-control" style="resize: vertical;" type="text" autofocus />
+                    <input id="datecreation" name="datecreation" class="form-control" style="resize: vertical;" type="text" autofocus />
                 </div>
                 <div class="form-group">
                     <label for="libChapoArt">Chapô de l'article</label>
@@ -51,8 +51,8 @@ if (isset($_GET['libThem'])) {
                     <textarea id="parag1Art" name="parag1Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="sousparag1Art">Sous titre 1</label>
-                    <textarea id="sousparag1Art" name="sousparag1Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
+                    <label for="libSsTitr1Art">Sous titre 1</label>
+                    <textarea id="libSsTitr1Art" name="libSsTitr1Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
                 <br />
                 <div class="form-group">
@@ -61,7 +61,7 @@ if (isset($_GET['libThem'])) {
                 </div>
                 <div class="form-group">
                     <label for="sousparag2Art">Sous titre 2</label>
-                    <textarea id="sousparag2Art" name="sousparag2Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
+                    <textarea id="sousparag2Art" name="sousparag1Art" class="form-control" rows="6" style="resize: vertical;"></textarea>
                 </div>
                 <br />
                 <div class="form-group">
