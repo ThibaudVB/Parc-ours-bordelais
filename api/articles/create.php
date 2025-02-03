@@ -4,8 +4,8 @@ require_once '../../functions/ctrlSaisies.php';
 
 var_dump($_POST);
 
+$dtCreaArt = date("Y-m-d H:i:s");  
 $libTitrArt = ctrlSaisies($_POST['libTitrArt']);
-$dtCreaArt = ctrlSaisies($_POST['dtCreaArt']);
 $libChapoArt = ctrlSaisies($_POST['libChapoArt']);
 $libAccrochArt = ctrlSaisies($_POST['libAccrochArt']);
 $parag1Art = ctrlSaisies($_POST['parag1Art']);
@@ -14,11 +14,29 @@ $parag2Art = ctrlSaisies($_POST['parag2Art']);
 $libSsTitr2Art = ctrlSaisies($_POST['libSsTitr2Art']);
 $parag3Art = ctrlSaisies($_POST['parag3Art']);
 $libConclArt = ctrlSaisies($_POST['libConclArt']);
-$urlPhotArt = $_FILES['urlPhotArt']['name']; 
+$numThem = ctrlSaisies($_POST['numThem']);
+$motsClesSelectionnes = isset($_POST['numMotCle']) ? $_POST['numMotCle'] : [];
+
+if (isset($_FILES['urlPhotArt'])) {
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/src/uploads/';
+    $urlPhotArt = $_FILES['urlPhotArt']['name'];
+    $uploadPath = $uploadDir . $urlPhotArt;
+    move_uploaded_file($_FILES['urlPhotArt']['tmp_name'], $uploadPath);
+
+}
 
 
-$attributs = "libTitrArt, dtCreaArt, libChapoArt, libAccrochArt, parag1Art, libSsTitr1Art, parag2Art, libSsTitr2Art, parag3Art, libConclArt, urlPhotArt";
-$values = "'$libTitrArt', '$dtCreaArt', '$libChapoArt', '$libAccrochArt', '$parag1Art', '$libSsTitr1Art', '$parag2Art', '$libSsTitr2Art', '$parag3Art', '$libConclArt', '$urlPhotArt'";
+// Récupérer le dernier ID inséré (numArt de l'article)
+$numArt = sql_select("article", "MAX(numArt)");
+
+// Associer les mots-clés à l'article dans la table MOTCLEARTICLE
+foreach ($motsClesSelectionnes as $numMotCle) {
+    sql_insert("MOTCLEARTICLE", "numArt, numMotCle", $numArt[0][0].','.$numMotCle);
+}
+
+
+$attributs = "libTitrArt, dtCreaArt, libChapoArt, libAccrochArt, parag1Art, libSsTitr1Art, parag2Art, libSsTitr2Art, parag3Art, libConclArt, urlPhotArt, numThem";
+$values = "'$libTitrArt', '$dtCreaArt', '$libChapoArt', '$libAccrochArt', '$parag1Art', '$libSsTitr1Art', '$parag2Art', '$libSsTitr2Art', '$parag3Art', '$libConclArt', '$urlPhotArt', '$numThem'";
 
 sql_insert('ARTICLE', $attributs, $values);
 

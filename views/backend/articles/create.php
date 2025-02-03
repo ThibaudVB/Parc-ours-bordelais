@@ -35,11 +35,6 @@ if (isset($_GET['libThem'])) {
                 </div>
                 <br />
                 <div class="form-group">
-                    <label for="dtCreaArt">Date de création</label>
-                    <input id="dtCreaArt" name="dtCreaArt" class="form-control" style="resize: vertical;"
-                        type="datetime-local" autofocus />
-                </div>
-                <div class="form-group">
                     <label for="libChapoArt">Chapô de l'article</label>
                     <input id="libChapoArt" name="libChapoArt" class="form-control" style="resize: vertical;"
                         type="text" autofocus />
@@ -89,6 +84,19 @@ if (isset($_GET['libThem'])) {
                     <label for="urlPhotArt">Ajouter une image</label>
                     <input type="file" name="urlPhotArt" class="form-control" id="urlPhotArt">
                 </div>
+                <div class="form-group">
+    <label for="numMotCle">Mots-clés</label>
+    <select class="form-select" name="numMotCle[]" multiple>
+        <?php
+        $motsCles = sql_select('motcle', 'numMotCle, libMotCle');
+        foreach ($motsCles as $motCle) {
+            echo '<option value="' . $motCle['numMotCle'] . '">' . $motCle['libMotCle'] . '</option>';
+        }
+        ?>
+    </select>
+    <small>Maintenez la touche Ctrl (Cmd sur Mac) pour sélectionner plusieurs mots-clés.</small>
+</div>
+
                 <br />
                 <div class="form-group">
                     <label for="numThem">Thématique de l'article</label>
