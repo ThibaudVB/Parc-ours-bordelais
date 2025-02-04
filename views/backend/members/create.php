@@ -158,3 +158,5 @@ $statuts = sql_select('STATUT', '*');
 </script>
 
 <?php include '../../../footer.php'; ?>
+
+//buisness
