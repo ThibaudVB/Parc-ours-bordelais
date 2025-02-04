@@ -25,17 +25,18 @@ if ($membre['numStat'] == 1) {
     <div class="row">
         <div class="col-md-12">
             <h1>Suppression d'un membre</h1>
-            <form action="<?= ROOT_URL . '/api/members/delete.php?numMemb='.$numMemb ?>" method="post">
+            <form action="<?= ROOT_URL . '/api/members/delete.php?numMemb=' . $numMemb ?>" method="post">
                 <?php
                 $champs = ['pseudoMemb' => 'Pseudo', 'prenomMemb' => 'Prénom', 'nomMemb' => 'Nom', 'eMailMemb' => 'Email'];
                 foreach ($champs as $key => $label) {
                     echo "<div class='form-group'><label for='$key'>$label</label>
-                          <input id='$key' name='$key' class='form-control' type='text' value='{$membre[$key]}' disabled/></div><br/>";
+                        <input id='$key' name='$key' class='form-control' type='text' value='{$membre[$key]}' disabled/></div><br/>";
                 }
                 ?>
                 <div class="form-group">
                     <label for="numStat">Statut</label>
-                    <input id="numStat" name="numStat" class="form-control" type="text" value="<?= $statut; ?>" disabled/>
+                    <input id="numStat" name="numStat" class="form-control" type="text" value="<?= $statut; ?>"
+                        disabled />
                 </div>
                 <br>
                 <div class="form-group mt-2">
