@@ -78,17 +78,79 @@ if(isset($_GET['numArt'])){
                 </div>
 
                 <div class="form-group">
-    <label for="numMotCle">Mots-clés</label>
-    <select class="form-select" name="numMotCle[]" multiple>
-        <?php
-        $motsCles = sql_select('motcle', 'numMotCle, libMotCle');
-        foreach ($motsCles as $motCle) {
-            echo '<option value="' . $motCle['numMotCle'] . '">' . $motCle['libMotCle'] . '</option>';
-        }
-        ?>
-    </select>
-    <small>Maintenez la touche Ctrl (Cmd sur Mac) pour sélectionner plusieurs mots-clés.</small>
+    <br>
+    <label for="numMotCle">Choisissez les mots-clés liés à l'article :</label>
+    <div class="keywords-container">
+        <!-- Liste des mots-clés disponibles -->
+        <select id="availableKeywords" class="form-select" multiple>
+            <?php
+            $motsCles = sql_select('motcle', 'numMotCle, libMotCle');
+            $motsClesSelectionnes = sql_select('MOTCLEARTICLE', 'numMotCle', "numArt = '$numArt'");
+            $motsClesSelectionnesArray = array_column($motsClesSelectionnes, 'numMotCle');
+            
+            foreach ($motsCles as $motCle) {
+                if (!in_array($motCle['numMotCle'], $motsClesSelectionnesArray)) {
+                    echo '<option value="' . $motCle['numMotCle'] . '">' . $motCle['libMotCle'] . '</option>';
+                }
+            }
+            ?>
+        </select>
+
+        <!-- Boutons d'action -->
+        <div class="buttons">
+            <button type="button" id="addKeyword">Ajouter >></button>
+            <button type="button" id="removeKeyword"><< Supprimer</button>
+        </div>
+
+        <!-- Liste des mots-clés sélectionnés -->
+        <select id="selectedKeywords" class="form-select" name="numMotCle[]" multiple>
+            <?php
+            foreach ($motsCles as $motCle) {
+                if (in_array($motCle['numMotCle'], $motsClesSelectionnesArray)) {
+                    echo '<option value="' . $motCle['numMotCle'] . '">' . $motCle['libMotCle'] . '</option>';
+                }
+            }
+            ?>
+        </select>
+    </div>
+    <small>Utilisez les boutons pour ajouter ou retirer des mots-clés.</small>
 </div>
+
+<style>
+    .keywords-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .form-select {
+        width: 200px;
+        height: 150px;
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+</style>
+
+<script>
+    document.getElementById("addKeyword").addEventListener("click", function () {
+        moveOptions("availableKeywords", "selectedKeywords");
+    });
+    
+    document.getElementById("removeKeyword").addEventListener("click", function () {
+        moveOptions("selectedKeywords", "availableKeywords");
+    });
+
+    function moveOptions(fromId, toId) {
+        let from = document.getElementById(fromId);
+        let to = document.getElementById(toId);
+        
+        Array.from(from.selectedOptions).forEach(option => {
+            to.appendChild(option);
+        });
+    }
+</script>
 
 
         
