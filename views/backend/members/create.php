@@ -14,7 +14,7 @@ $statuts = sql_select('STATUT', '*');
             <form action="<?php echo ROOT_URL . '/api/members/create.php' ?>" id="form-recaptcha" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="pseudoMemb">Pseudo (non modifiable)</label>
-                    <input id="pseudoMemb" name="pseudoMemb" class="form-control" type="text" autofocus="autofocus" />
+                    <input id="pseudoMemb" name="pseudoMemb" class="form-control" type="text" autofocus="autofocus" minlength="6" maxlength="70" />
                     <small id="emailHelp" class="form-text text-muted">(Entre 6 et 70 car.)</small>
                 </div>
                 <br/>
