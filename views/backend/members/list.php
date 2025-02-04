@@ -1,7 +1,7 @@
 <?php
 include '../../../header.php'; // contains the header and call to config.php
 
-//Load all statuts
+// Load all statuts
 $membres = sql_select("MEMBRE", "*");
 $statuts = sql_select("STATUT", "*");
 
@@ -18,6 +18,7 @@ foreach ($statuts as $statut) {
             <h1>Membres</h1>
             <table class="table table-striped">
                 <thead>
+                    <tr>
                         <th>Id</th>
                         <th>Nom des Membres</th>
                         <th>Pseudos</th>
@@ -25,30 +26,24 @@ foreach ($statuts as $statut) {
                         <th>Accord RGPD</th>
                         <th>Statut</th>
                         <th>Actions</th>
-                        </tr>
+                    </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($membres as $membres) { ?>
+                    <?php foreach ($membres as $membre) { ?>
                         <tr>
-                            <td><?php echo ($membres['numMemb']); ?></td>
-                            <td><?php echo ($membres['prenomMemb'] . ' ' . $membres['nomMemb']); ?></td>
-                            <td><?php echo ($membres['pseudoMemb']); ?></td>
-                            <td><?php echo ($membres['eMailMemb']); ?></td>
-                            <td><?php echo str_replace([1, 0], ["oui", "non"], $membres['accordMemb']); ?></td>
+                            <td><?php echo ($membre['numMemb']); ?></td>
+                            <td><?php echo ($membre['prenomMemb'] . ' ' . $membre['nomMemb']); ?></td>
+                            <td><?php echo ($membre['pseudoMemb']); ?></td>
+                            <td><?php echo ($membre['eMailMemb']); ?></td>
+                            <td><?php echo str_replace([1, 0], ["oui", "non"], $membre['accordMemb']); ?></td>
                             <td>
                                 <?php
-                                if (isset($assoc[$membres['numStat']])) {
-                                    echo $assoc[$membres['numStat']];
-                                } else {
-                                    echo "Inconnu";
-                                }
+                                echo isset($assoc[$membre['numStat']]) ? $assoc[$membre['numStat']] : "Inconnu";
                                 ?>
                             </td>
                             <td>
-                                <a href="edit.php?numArt=<?php echo ($membres['numMemb']); ?>"
-                                    class="btn btn-primary">Edit</a>
-                                <a href="delete.php?numArt=<?php echo ($membres['numMemb']); ?>"
-                                    class="btn btn-danger">Delete</a>
+                                <a href="edit.php?numMemb=<?php echo ($membre['numMemb']); ?>" class="btn btn-primary">Edit</a>
+                                <a href="delete.php?numMemb=<?php echo ($membre['numMemb']); ?>" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -58,5 +53,7 @@ foreach ($statuts as $statut) {
         </div>
     </div>
 </div>
+
 <?php
 include '../../../footer.php'; // contains the footer
+?>
