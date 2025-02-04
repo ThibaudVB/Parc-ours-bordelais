@@ -23,7 +23,7 @@ if(isset($_GET['numArt'])){
                 </div>
                 <br />
                 <div class="form-group mt-2">
-                    <button type="submit" class="btn btn-danger">Confirmer lz suppression</button>
+                    <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
                 </div>
             </form>
         </div>
