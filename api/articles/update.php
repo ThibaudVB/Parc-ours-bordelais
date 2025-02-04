@@ -24,42 +24,44 @@ if (isset($_FILES['urlPhotArt']) && $_FILES['urlPhotArt']['size'] > 0) {
     $urlPhotArt = $_FILES['urlPhotArt']['name'];
     $uploadPath = $uploadDir . $urlPhotArt;
     move_uploaded_file($_FILES['urlPhotArt']['tmp_name'], $uploadPath);
-    
+
     // Mettre à jour l'article avec l'image
-    sql_update("ARTICLE", 
+    sql_update(
+        "ARTICLE",
         "libTitrArt = '$libTitrArt',
-         dtMajArt = '$dtMajArt',
-         libChapoArt = '$libChapoArt',
-         libAccrochArt = '$libAccrochArt',
-         parag1Art = '$parag1Art',
-         libSsTitr1Art = '$libSsTitr1Art',
-         parag2Art = '$parag2Art',
-         libSsTitr2Art = '$libSsTitr2Art',
-         parag3Art = '$parag3Art',
-         libConclArt = '$libConclArt',
-         urlPhotArt = '$urlPhotArt',
-         numThem = '$numThem'", 
+        dtMajArt = '$dtMajArt',
+        libChapoArt = '$libChapoArt',
+        libAccrochArt = '$libAccrochArt',
+        parag1Art = '$parag1Art',
+        libSsTitr1Art = '$libSsTitr1Art',
+        parag2Art = '$parag2Art',
+        libSsTitr2Art = '$libSsTitr2Art',
+        parag3Art = '$parag3Art',
+        libConclArt = '$libConclArt',
+        urlPhotArt = '$urlPhotArt',
+        numThem = '$numThem'",
         "numArt = '$numArt'"
     );
 } else {
     // Mettre à jour l'article sans toucher à l'image
-    sql_update("ARTICLE", 
+    sql_update(
+        "ARTICLE",
         "libTitrArt = '$libTitrArt',
-         dtMajArt = '$dtMajArt',
-         libChapoArt = '$libChapoArt',
-         libAccrochArt = '$libAccrochArt',
-         parag1Art = '$parag1Art',
-         libSsTitr1Art = '$libSsTitr1Art',
-         parag2Art = '$parag2Art',
-         libSsTitr2Art = '$libSsTitr2Art',
-         parag3Art = '$parag3Art',
-         libConclArt = '$libConclArt',
-         numThem = '$numThem'", 
+        dtMajArt = '$dtMajArt',
+        libChapoArt = '$libChapoArt',
+        libAccrochArt = '$libAccrochArt',
+        parag1Art = '$parag1Art',
+        libSsTitr1Art = '$libSsTitr1Art',
+        parag2Art = '$parag2Art',
+        libSsTitr2Art = '$libSsTitr2Art',
+        parag3Art = '$parag3Art',
+        libConclArt = '$libConclArt',
+        numThem = '$numThem'",
         "numArt = '$numArt'"
     );
 }
 
-// 🔄 Mise à jour des mots-clés associés à l'article
+// Mise à jour des mots-clés associés à l'article
 // 1. Supprimer les anciens mots-clés de l'article
 sql_delete("MOTCLEARTICLE", "numArt = '$numArt'");
 
