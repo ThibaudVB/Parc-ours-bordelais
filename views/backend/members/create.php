@@ -109,6 +109,10 @@ $statuts = sql_select('STATUT', '*');
             const allValid = document.querySelectorAll(".invalid").length === 0;
             const isAccordChecked = accordOui.checked;
             submitButton.disabled = !(allValid && isAccordChecked);
+            const prenomMemb = document.getElementById("prenomMemb").value.trim();
+const nomMemb = document.getElementById("nomMemb").value.trim();
+const areNamesFilled = prenomMemb !== "" && nomMemb !== "";
+
         }
 
         pseudoInput.addEventListener("input", function() {

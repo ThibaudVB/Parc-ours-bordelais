@@ -2,22 +2,14 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once '../../functions/ctrlSaisies.php';
 
-$numArt = ctrlSaisies($_POST['numArt']);
-$motCles = sql_select("MOTCLEARTICLE", "*");
+$numArt = ctrlSaisies($_GET['numArt']);
 
-$ancienneImage = sql_select("ARTICLE", "urlPhotArt", "numArt = $numArt")[0]['urlPhotArt'];
-if (!empty($ancienneImage)) {
-    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/src/uploads/';
-    unlink($uploadDir . $ancienneImage);
-}
+// Suppression des dépendances avant de supprimer l'article
+sql_delete('MOTCLEARTICLE', "numArt = $numArt");  // Supprime les mots-clés liés
+sql_delete('COMMENT', "numArt = $numArt");        // Supprime les commentaires liés
+sql_delete('LIKEART', "numArt = $numArt");        // Supprime les likes liés
+sql_delete('ARTICLE', "numArt = $numArt");        // Supprime l'article lui-même
 
-foreach($motCles as $motCle){
-    $numMotCle = $motCle["numMotCle"];
-    $motCleArt = $motCle["numArt"];
-    if($motCleArt == $numArt){
-        sql_delete('MOTCLEARTICLE', "numArt = $numArt AND numMotCle = $numMotCle");
-    }
-}
-sql_delete('ARTICLE', "numArt = $numArt");
-
+// Redirection vers la liste des articles
 header('Location: ../../views/backend/articles/list.php');
+exit;
