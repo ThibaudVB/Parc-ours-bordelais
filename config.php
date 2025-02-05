@@ -5,7 +5,7 @@ define('ROOT_URL', 'http://' . $_SERVER['HTTP_HOST']);
 
 //Load env
 require_once ROOT . '/includes/libs/DotEnv.php';
-f(strpos($_SERVER['HTTP_HOST'], 'scalingo')  == false) {
+if(strpos($_SERVER['HTTP_HOST'], 'scalingo')  == false) {
 (new DotEnv(ROOT.'/.env'))->load();
 }
 //defines
