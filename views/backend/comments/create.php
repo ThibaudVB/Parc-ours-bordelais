@@ -3,9 +3,19 @@ include '../../../header.php';
 
 $articles = sql_select('ARTICLE', '*');
 $membre = sql_select('MEMBRE', '*');
+$username = $_SESSION['username'];
 
-$prenomMemb = sql_select('MEMBRE', 'prenomMemb', 'pseudoMemb' == $_SESSION['username']);
-$nomMemb = sql_select('MEMBRE', 'nomMemb', 'pseudoMemb' == $_SESSION['username']);
+if(isset($username)){
+    $membre = sql_select("MEMBRE", "*", "pseudoMemb = '" . $username . "'");
+
+    $numMemb = $membre[0]['numMemb'];
+    $prenomMemb = $membre[0]['prenomMemb'];
+    $nomMemb = $membre[0]['nomMemb'];
+    $pseudoMemb = $membre[0]['pseudoMemb'];
+}
+
+//$prenomMemb = sql_select('MEMBRE', 'prenomMemb', 'pseudoMemb' == $username);
+//$nomMemb = sql_select('MEMBRE', 'nomMemb', 'pseudoMemb' == $username);
 
 ?>
 
@@ -32,17 +42,16 @@ $nomMemb = sql_select('MEMBRE', 'nomMemb', 'pseudoMemb' == $_SESSION['username']
                     <input id="prenomMemb" name="prenomMemb" class="form-control" type="text" value="<?php if (isset($prenomMemb)) {
                         echo $prenomMemb;
                     } else {
-                        echo "Veuillez vous connecter";
+                        echo 'Veuillez vous connecter';
                     } ?>" readonly>
                 </p>
 
                 <p class="form-group">
                     <label for="nomMemb">Nom</label>
-                    <input id="nomMemb" name="nomMemb" class="form-control" type="text"
-                        value="<?php if (isset($nomMemb)) {
+                    <input id="nomMemb" name="nomMemb" class="form-control" type="text" value="<?php if (isset($nomMemb)) {
                         echo $nomMemb;
                     } else {
-                        echo "Veuillez vous connecter";
+                        echo 'Veuillez vous connecter';
                     } ?>" readonly>
                 </p>
 
