@@ -1,53 +1,39 @@
 <?php
-
-include '../../../config.php';
+session_start();
+include '../../../header.php';
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Se connecter</title>
-    <link rel="stylesheet" href="../../../src/css/login.css">
+    <meta charset="UTF-8">
+    <title>Connexion</title>
 </head>
-<body>
-    <div class="login">
-        <button class="return" onclick="previousPage(1)"><img class="button-return" src="/src/images/Vector.png" alt="return"> Retour </button>
-        <br><br>
-        <img src="/src/images/logo-marron.svg" alt="Logo" width="158.465px" height="128.826px">
-        <br>
-        <h1>Se connecter</h1>
-        <p>Petite phrase de début pour donner envie</p>
-        <form action="<?php echo ROOT_URL . '/api/security/login.php' ?>" id="form-recaptcha" method="post">
-            <p><input type="text" name="pseudoMemb" value="" placeholder="nom.prenom@mail.com"></p>
-            <p><input type="password" name="passMemb"id="mdp" value="" placeholder="* * * * *"></p>
-            <div class="form-group">
-                <input type="checkbox" id="visuMdp2" name="visuMdp" onchange="togglePasswordVisibility('mdp', 'visuMdp2')">
-                <label for="visuMdp2">Afficher le mot de passe</label>
-            </div>
-            <div class="envoie centered">
-                <p><input type="submit" name="commit" value="Se connecter"></p>
-            </div>    
-            <div class="signup">
-                <br>
-                <p>Pas encore de compte ?<a class="singup" href="signup.php">Inscrivez-vous</a></p>
-            </div>
-        </form>
+<body style="margin: 0; padding: 0; height: 100vh; display: flex; flex-direction: column; justify-content: flex-start;">
+    <!-- Le header reste en haut -->
+    <!-- Le formulaire centré et agrandi -->
+    <div style="flex: 1; display: flex; justify-content: center; align-items: center; background-color: #f9f9f9;">
+        <div style="width: 400px; padding: 30px; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h2 style="font-size: 30px; text-align: center; margin-bottom: 30px;">Connexion</h2>
+            <form action="<?php echo ROOT_URL . '/api/security/login.php' ?>" method="POST">
+                <div style="margin-bottom: 20px;">
+                    <label for="pseudo" style="font-size: 18px;">Pseudo :</label><br>
+                    <input type="text" name="pseudo" id="pseudo" required minlength="6" maxlength="70" 
+                        style="width: 100%; padding: 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label for="password" style="font-size: 18px;">Mot de passe :</label><br>
+                    <input type="password" name="password" id="password" required minlength="8" maxlength="15" 
+                        style="width: 100%; padding: 15px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">
+                </div>
+
+                <button type="submit" 
+                    style="width: 100%; background-color: #4CAF50; color: white; padding: 15px; font-size: 18px; border: none; border-radius: 6px; cursor: pointer;">
+                    Se connecter
+                </button>
+            </form>
+        </div>
     </div>
 </body>
-
-<script>
-function previousPage(nbPage){
-    window.history.go(-(nbPage));
-}
-function togglePasswordVisibility(passId, visuId) {
-    var passInput = document.getElementById(passId);
-    var visuCheckbox = document.getElementById(visuId);
-    if (visuCheckbox.checked) {
-        passInput.type = 'text';
-    } else {
-        passInput.type = 'password';
-    }
-}
-</script>
 </html>

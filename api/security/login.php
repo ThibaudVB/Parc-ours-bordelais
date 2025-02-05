@@ -1,39 +1,27 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once '../../functions/ctrlSaisies.php';
-require_once '../../functions/getExistPseudo.php';
 
-$pseudo = $_POST["pseudoMemb"];
-$pass = $_POST["passMemb"];
-
-if (get_ExistPseudo($pseudo)) {
-    $resultat = sql_select("MEMBRE", "*", "pseudoMemb = '$pseudo'");
-
-    $numMemb = $resultat[0]["numMemb"];
-    $passMembHash = $resultat[0]['passMemb'];
-
-    if (password_verify($pass, $passMembHash)) {
-        setcookie('pseudo', $pseudoMemb, time() + (86400 * 30), "/");
-
-        session_start();
-        $_SESSION['logged'] = true;
-        $_SESSION['username'] = $pseudo;
-        $_SESSION['numMemb'] = $numMemb;
-        $_SESSION['nomMemb'] = $nom;
-        $_SESSION['prenomMemb'] = $prenom;
-        $_SESSION['pseudoMemb'] = $pseudo;
-
-        $numStat = sql_select("membre", "numStat", "pseudoMemb = '$pseudo'");
-        $numStat = $numStat[0]["numStat"];
-
-        $_SESSION['numStat'] = $numStat;
-        $_SESSION['likeArt'] = array();
-
-        header('Location: ../../index.php');
-
-    } else {
-        die("Compte inexistant");
-    }
-} else {
-    die("Compte inexistant");
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $pseudologin = trim($_POST['pseudo']);
+    $password = $_POST['password']; 
 }
+
+$pseudo = sql_select("MEMBRE", "pseudoMemb");
+$mdp = sql_select("MEMBRE", "passMemb");
+
+foreach ($pseudo as $key => $value) {
+    if ($pseudologin == $value["pseudoMemb"]) {
+        foreach ($mdp as $key => $values) {
+            if (password_verify($password, $values["passMemb"])) {
+                $_SESSION["pseudo"] = $pseudologin;
+                header('Location: ../../../index.php');
+                exit();
+            }
+        }
+    }
+    
+}
+
+header('Location: ../../../login.php?error=1');
+exit();
