@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
+  
+<?php
+// Démarrer la session seulement si elle n'est pas déjà active
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once 'config.php';
+$NumStat = sql_select("MEMBRE", "numStat");
+?>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,10 +20,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
     <link rel="shortcut icon" type="image/x-icon" href="src/images/article.png" />
 </head>
-<?php
-//load config
-require_once 'config.php';
-?>
+
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
@@ -36,8 +43,21 @@ require_once 'config.php';
       <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Rechercher sur le site…" aria-label="Search" >
       </form>
-      <a class="btn btn-primary m-1" href="/views/backend/security/login.php" role="button">Login</a>
-      <a class="btn btn-dark m-1" href="/views/backend/security/signup.php" role="button">Sign up</a>
+
+      <?php if (!isset($_SESSION['pseudoMemb'])): ?>
+          <!-- Si l'utilisateur n'est pas connecté, afficher les boutons login et signup -->
+          <a class="btn btn-primary m-1" href="/views/backend/security/login.php" role="button">Login</a>
+          <a class="btn btn-dark m-1" href="/views/backend/security/signup.php" role="button">Sign up</a>
+      <?php else: ?>
+          <!-- Si l'utilisateur est connecté, afficher le bouton logout -->
+          <a class="btn btn-danger m-1" href="/api/security/disconnect.php" role="button">Logout</a>
+      <?php endif; ?>
     </div>
   </div>
 </nav>
+</body>
+</html>
+
+
+
+

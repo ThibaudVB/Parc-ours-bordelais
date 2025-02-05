@@ -1,6 +1,8 @@
 <?php
 session_start();
 include '../../../header.php';
+include '../../../config.php';
+var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +12,6 @@ include '../../../header.php';
     <title>Connexion</title>
 </head>
 <body style="margin: 0; padding: 0; height: 100vh; display: flex; flex-direction: column; justify-content: flex-start;">
-    <!-- Le header reste en haut -->
     <!-- Le formulaire centré et agrandi -->
     <div style="flex: 1; display: flex; justify-content: center; align-items: center; background-color: #f9f9f9;">
         <div style="width: 400px; padding: 30px; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">

@@ -1,7 +1,12 @@
 <?php
 //define ROOT_PATH
-define('ROOT', $_SERVER['DOCUMENT_ROOT']);
-define('ROOT_URL', 'http://' . $_SERVER['HTTP_HOST']);
+if (!defined('ROOT')) {
+    define('ROOT', $_SERVER['DOCUMENT_ROOT']);
+}
+if (!defined('ROOT_URL')) {
+    define('ROOT_URL', 'http://' . $_SERVER['HTTP_HOST']);
+}
+
 
 //Load env
 require_once ROOT . '/includes/libs/DotEnv.php';
