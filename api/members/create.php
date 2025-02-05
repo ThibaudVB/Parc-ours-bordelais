@@ -5,6 +5,52 @@ require_once '../../functions/getExistPseudo.php';
 
 session_start();
 
+if(isset($_POST['g-recaptcha-response'])){
+    $token = $_POST['g-recaptcha-response'];
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = array(
+    'secret' => '6LcWhcwqAAAAAHOwS1inexbMJLOV6mig9zXzMYGK',
+    'response' => $token
+    );
+    $options = array(
+    'http' => array (
+
+    'header' => "Content-Type: application/x-www-form-
+    urlencoded\r\n",
+
+    'method' => 'POST',
+    'content' => http_build_query($data)
+    )
+    );
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    $response = json_decode($result, true);
+    /*
+    - google response score is between 0.0 to 1.0
+    - if score is 0.5, it's a human
+    - if score is 0.0, it's a bot
+    - google recommend to use score 0.5 for verify human
+    */
+
+    /*
+    if(!($response["success"] ?? false)) {
+        var_dump("mal");
+        exit();
+    } else {
+        var_dump("bien");
+        exit;
+    }
+    if ($response->success && $response->score >= 0.5) {
+        //Le test est réussi, on peut inscrire la personne si le pseudo et le mot de passe sont bons
+        var_dump(array('success' => true, "msg"=>"You are not a robot!",
+        "response"=>$response));
+    }else{
+        var_dump(array('success' => false, "msg"=>"You are a robot!",
+        "response"=>$response));
+    }
+    */
+}
+
 // Vérification AJAX pour le pseudo
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pseudo'])) {
     $pseudo = ctrlSaisies($_GET['pseudo']);
@@ -85,6 +131,7 @@ sql_insert('MEMBRE', 'nomMemb, prenomMemb, pseudoMemb, passMemb, eMailMemb, acco
 // Création de la session
 $_SESSION['logged_in'] = true;
 $_SESSION['username'] = $pseudo;
+
 
 header('Location: ../../views/backend/members/list.php');
 exit();
