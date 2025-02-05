@@ -10,24 +10,24 @@ if (!isset($_SESSION['pseudoMemb'])) {
     exit();
 }
 
-// Si l'utilisateur est connecté, récupérer ses informations
-$pseudo = $_SESSION['pseudoMemb'];
-$user = sql_select("MEMBRE", "*", "pseudoMemb = '$pseudo'");
-
-// Vérifier que l'utilisateur existe et récupérer le NumStat
-if ($user && isset($user[0]['NumStat'])) {
-    $numStat = $user[0]['NumStat'];
-
-    // Si NumStat n'est pas égal à 1 (Administrateur), redirige vers index.php
-    if ($numStat != 1) {
-        header('Location: :/index.php');
-        exit();
-    }
-} else {
-    // Si l'utilisateur n'a pas de statut valide, redirige vers index.php
-    header('Location: /index.php');
-    exit();
-}
+//// Si l'utilisateur est connecté, récupérer ses informations
+//$pseudo = $_SESSION['pseudoMemb'];
+//$user = sql_select("MEMBRE", "*", "pseudoMemb = '$pseudo'");
+//
+//// Vérifier que l'utilisateur existe et récupérer le NumStat
+//if ($user && isset($user[0]['NumStat'])) {
+//    $numStat = $user[0]['NumStat'];
+//
+//    // Si NumStat n'est pas égal à 1 (Administrateur), redirige vers index.php
+//    if ($numStat != 1) {
+//        header('Location: :/index.php');
+//        exit();
+//    }
+//} else {
+//    // Si l'utilisateur n'a pas de statut valide, redirige vers index.php
+//    header('Location: /index.php');
+//    exit();
+//}
 ?>
 <!-- Ton HTML pour dashboard.php ici, à condition que l'utilisateur ait le bon statut -->
 
