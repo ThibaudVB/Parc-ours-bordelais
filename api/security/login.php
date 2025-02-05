@@ -6,7 +6,7 @@ require_once '../../functions/getExistPseudo.php';
 $pseudo = $_POST["pseudoMemb"];
 $pass = $_POST["passMemb"];
 
-if (get_ExistPseudo($pseudo)){
+if (get_ExistPseudo($pseudo)) {
     $resultat = sql_select("MEMBRE", "*", "pseudoMemb = '$pseudo'");
 
     $numMemb = $resultat[0]["numMemb"];
@@ -19,18 +19,21 @@ if (get_ExistPseudo($pseudo)){
         $_SESSION['logged'] = true;
         $_SESSION['username'] = $pseudo;
         $_SESSION['numMemb'] = $numMemb;
+        $_SESSION['nomMemb'] = $nom;
+        $_SESSION['prenomMemb'] = $prenom;
+        $_SESSION['pseudoMemb'] = $pseudo;
 
         $numStat = sql_select("membre", "numStat", "pseudoMemb = '$pseudo'");
         $numStat = $numStat[0]["numStat"];
 
         $_SESSION['numStat'] = $numStat;
         $_SESSION['likeArt'] = array();
-        
+
         header('Location: ../../index.php');
 
     } else {
         die("Compte inexistant");
     }
-}else {
+} else {
     die("Compte inexistant");
 }

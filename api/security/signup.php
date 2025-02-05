@@ -85,6 +85,9 @@ sql_insert('MEMBRE', 'nomMemb, prenomMemb, pseudoMemb, passMemb, eMailMemb, acco
 // Création de la session
 $_SESSION['logged_in'] = true;
 $_SESSION['username'] = $pseudo;
+$_SESSION['nomMemb'] = $nom;
+$_SESSION['prenomMemb'] = $prenom;
+$_SESSION['pseudoMemb'] = $pseudo;
 
 header('Location: ../../views/backend/members/list.php');
 exit();
