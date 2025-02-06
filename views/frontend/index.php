@@ -1,7 +1,8 @@
 <?php
 require_once '../../header.php';
+require_once '../../config.php';
 //sql_connect();
-
+$articles = sql_select("ARTICLE", "LibTitrArt, numArt");
 //echo ("Evénement");
 ?>
 
@@ -52,7 +53,7 @@ require_once '../../header.php';
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-7">
-              <h1 class="mb-3">Bienvenu sur notre blog</h1>
+              <h1 class="mb-3">Bienvenue sur notre blog</h1>
               <p>Le Studio Verdeaux vous souhaite une bonne lecture</p>
               <p><a href="#" class="btn btn-success">En savoir plus</a></p>
             </div>
@@ -61,25 +62,30 @@ require_once '../../header.php';
       </div>
     </div>
 
-    <div class="site-section bg-light"> <!-- BLOCK ARTICLES -->
-      <div class="container">
+    <div class="site-section bg-light">
+    <div class="container">
         <div class="row">
 
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="post-entry-1 h-100">
-              <a href="events.php">
-                <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-entry-1-contents">
+            <?php foreach ($articles as $article) : ?>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="post-entry-1 h-100">
+                        <a href="article1.php?numArt=<?php echo $article['numArt']; ?>">
+                            <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
+                        </a>
+                        <div class="post-entry-1-contents">
+                            <h2><a href="article1.php?numArt=<?php echo $article['numArt']; ?>">
+                                <?php echo htmlspecialchars($article['LibTitrArt']); ?>
+                            </a></h2>
+                            <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
 
-                <h2><a href="">L'arbre en fête</a></h2>
-                <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a
-                    href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias
-                  consectetur.</p>
-              </div>
-            </div>
-          </div>
+        </div>
+    </div>
+</div>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="post-entry-1 h-100">
               <a href="actors.php">

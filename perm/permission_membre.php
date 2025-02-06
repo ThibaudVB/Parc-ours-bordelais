@@ -13,7 +13,7 @@ $user = sql_select("MEMBRE", "*", "pseudoMemb = '$pseudo'");
         // Laisser l'accès à la page
     } else {
         // Sinon, redirige vers index.php
-        header('Location: /view/frontend/index.php');
+        header('Location: /views/frontend/index.php');
         exit();
 }
 

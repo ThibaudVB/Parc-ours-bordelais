@@ -1,6 +1,6 @@
 <?php
-require_once '../../../header.php';
-require_once '../../../config.php';
+require_once 'header.php';
+require_once '/../../config.php';
 
 // Vérifier si "numArt" est bien dans l'URL
 if (!isset($_GET['numArt']) || empty($_GET['numArt'])) {
