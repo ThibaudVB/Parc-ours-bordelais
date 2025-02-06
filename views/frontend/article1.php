@@ -1,6 +1,6 @@
 <?php
-require_once 'header.php';
-require_once '/../../config.php';
+require_once '../../header.php';
+require_once '../../config.php';
 
 // Vérifier si "numArt" est bien dans l'URL
 if (!isset($_GET['numArt']) || empty($_GET['numArt'])) {
@@ -21,16 +21,16 @@ if (empty($article)) {
 }
 
 // Extraire les données de l'article
-$libTitrArt = html_entity_decode($article[0]['libTitrArt']);
-$libChapoArt = html_entity_decode($article[0]['libChapoArt']);
-$libAccrochArt = html_entity_decode($article[0]['libAccrochArt']);
-$parag1Art = nl2br(html_entity_decode($article[0]['parag1Art']));
-$libSsTitr1Art = html_entity_decode($article[0]['libSsTitr1Art']);
-$parag2Art = nl2br(html_entity_decode($article[0]['parag2Art']));
-$libSsTitr2Art = html_entity_decode($article[0]['libSsTitr2Art']);
-$parag3Art = nl2br(html_entity_decode($article[0]['parag3Art']));
-$libConclArt = nl2br(html_entity_decode($article[0]['libConclArt']));
-$urlPhotArt = html_entity_decode($article[0]['urlPhotArt']);
+$libTitrArt = htmlspecialchars($article[0]['libTitrArt']);
+$libChapoArt = htmlspecialchars($article[0]['libChapoArt']);
+$libAccrochArt = htmlspecialchars($article[0]['libAccrochArt']);
+$parag1Art = nl2br(htmlspecialchars($article[0]['parag1Art']));
+$libSsTitr1Art = htmlspecialchars($article[0]['libSsTitr1Art']);
+$parag2Art = nl2br(htmlspecialchars($article[0]['parag2Art']));
+$libSsTitr2Art = htmlspecialchars($article[0]['libSsTitr2Art']);
+$parag3Art = nl2br(htmlspecialchars($article[0]['parag3Art']));
+$libConclArt = nl2br(htmlspecialchars($article[0]['libConclArt']));
+$urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
 ?>
 
 <!doctype html>
@@ -95,22 +95,22 @@ $urlPhotArt = html_entity_decode($article[0]['urlPhotArt']);
       <div class="container">
         <div class="row">
           <div class="col-md-8 blog-content">
-            <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+            <p class="lead"><?php echo $libTitrArt; ?></p>
+            <p><?php echo $libChapoArt; ?></p>
 
-            <blockquote><p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p></blockquote>
+            <blockquote><p><?php echo $libAccrochArt; ?></p></blockquote>
 
-            <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+            <p><?php echo $parag1Art; ?></p>
 
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <p><?php echo $libSsTitr1Art; ?></p>
 
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+            <p><?php echo $parag2Art; ?></p>
 
-            <blockquote><p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p></blockquote>
+            <blockquote><p><?php echo $libSsTitr2Art; ?></p></blockquote>
 
-            <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+            <p><?php echo $parag3Art; ?></p>
             
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <p><?php echo $libConclArt; ?></p>
 
 
             <div class="pt-5">
