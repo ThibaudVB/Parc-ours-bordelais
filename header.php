@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-  
+ 
 <?php
 // Démarrer la session seulement si elle n'est pas déjà active
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+var_dump($_SESSION);
 
 require_once 'config.php';
 $NumStat = sql_select("MEMBRE", "numStat");
@@ -34,8 +35,11 @@ $NumStat = sql_select("MEMBRE", "numStat");
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/views/backend/dashboard.php">Admin</a>
-        </li>
+  <?php if (isset($_SESSION['pseudoMemb']) && $_SESSION['pseudoMemb'] === 'Admin99'): ?>
+    <a class="nav-link" href="/views/backend/dashboard.php">Admin</a>
+  <?php endif; ?>
+</li>
+
       </ul>
     </div>
     <!--right align-->

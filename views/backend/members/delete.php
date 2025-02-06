@@ -1,5 +1,6 @@
 <?php
 include '../../../header.php';
+include __DIR__ . '/../../../perm/permission_admin.php';
 require_once '../../../functions/ctrlSaisies.php';
 
 if (!isset($_GET['numMemb']) || empty($_GET['numMemb'])) {

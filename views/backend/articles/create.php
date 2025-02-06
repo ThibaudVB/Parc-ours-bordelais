@@ -1,5 +1,6 @@
 <?php
 include '../../../header.php';
+include __DIR__ . '/../../../perm/permission_admin.php';
 
 if (isset($_GET['libThem'])) {
     $libThem = $_GET['libThem'];
