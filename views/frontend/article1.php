@@ -122,9 +122,6 @@ $urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
               <h3 class="mb-5">6 Comments</h3>
               <ul class="comment-list">
                 <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_2.jpg" alt="Free Website Template by Free-Template.co">
-                  </div>
                   <div class="comment-body">
                     <h3>Jacob Smith</h3>
                     <div class="meta">January 9, 2018 at 2:21pm</div>
@@ -134,9 +131,6 @@ $urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
                 </li>
 
                 <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_3.jpg" alt="Free Website Template by Free-Template.co">
-                  </div>
                   <div class="comment-body">
                     <h3>Chris Meyer</h3>
                     <div class="meta">January 9, 2018 at 2:21pm</div>
@@ -144,11 +138,8 @@ $urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
                     <p><a href="#" class="reply">Reply</a></p>
                   </div>
 
-                  <ul class="children">
+                  
                     <li class="comment">
-                      <div class="vcard bio">
-                        <img src="images/person_5.jpg" alt="Free Website Template by Free-Template.co">
-                      </div>
                       <div class="comment-body">
                         <h3>Chintan Patel</h3>
                         <div class="meta">January 9, 2018 at 2:21pm</div>
@@ -157,11 +148,8 @@ $urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
                       </div>
 
 
-                      <ul class="children">
+                      
                         <li class="comment">
-                          <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co">
-                          </div>
                           <div class="comment-body">
                             <h3>Jean Doe</h3>
                             <div class="meta">January 9, 2018 at 2:21pm</div>
@@ -169,11 +157,8 @@ $urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
                             <p><a href="#" class="reply">Reply</a></p>
                           </div>
 
-                            <ul class="children">
+                            
                               <li class="comment">
-                                <div class="vcard bio">
-                                  <img src="images/person_4.jpg" alt="Free Website Template by Free-Template.co">
-                                </div>
                                 <div class="comment-body">
                                   <h3>Ben Afflick</h3>
                                   <div class="meta">January 9, 2018 at 2:21pm</div>
@@ -181,17 +166,14 @@ $urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
                                   <p><a href="#" class="reply">Reply</a></p>
                                 </div>
                               </li>
-                            </ul>
+                            
                         </li>
-                      </ul>
+                      
                     </li>
-                  </ul>
+                  
                 </li>
 
                 <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co">
-                  </div>
                   <div class="comment-body">
                     <h3>Jean Doe</h3>
                     <div class="meta">January 9, 2018 at 2:21pm</div>
