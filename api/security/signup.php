@@ -5,29 +5,29 @@ require_once '../../functions/getExistPseudo.php';
 
 session_start();
 
-// Vérification AJAX pour le pseudo
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pseudo'])) {
     $pseudo = ctrlSaisies($_GET['pseudo']);
     $exists = get_ExistPseudo($pseudo) > 0;
     echo json_encode(['exists' => $exists]);
-    exit; // Stopper le script après avoir renvoyé la réponse AJAX
+    exit; 
 }
 
-// Vérification que la requête est bien une requête POST
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Méthode non autorisée.");
 }
 
 $error = false;
 
-// Vérification Nom et Prénom
+
 if (empty($_POST['nomMemb']) || empty($_POST['prenomMemb'])) {
     die("Les champs nom et prénom sont obligatoires.");
 }
 $nom = ctrlSaisies($_POST['nomMemb']);
 $prenom = ctrlSaisies($_POST['prenomMemb']);
 
-// Vérification Pseudo
+
 if (empty($_POST['pseudoMemb'])) {
     die("Le champ pseudo est obligatoire.");
 }
@@ -39,7 +39,7 @@ if (get_ExistPseudo($pseudo) > 0) {
     die("Le pseudo existe déjà.");
 }
 
-// Vérification Email
+
 if (empty($_POST['email1']) || empty($_POST['email2'])) {
     die("Veuillez saisir des adresses email.");
 }

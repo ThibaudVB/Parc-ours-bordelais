@@ -24,16 +24,12 @@ if (isset($_FILES['urlPhotArt'])) {
     move_uploaded_file($_FILES['urlPhotArt']['tmp_name'], $uploadPath);
 }
 
-// Insérer l'article
+
 $attributs = "libTitrArt, dtCreaArt, libChapoArt, libAccrochArt, parag1Art, libSsTitr1Art, parag2Art, libSsTitr2Art, parag3Art, libConclArt, urlPhotArt, numThem";
 $values = "'$libTitrArt', '$dtCreaArt', '$libChapoArt', '$libAccrochArt', '$parag1Art', '$libSsTitr1Art', '$parag2Art', '$libSsTitr2Art', '$parag3Art', '$libConclArt', '$urlPhotArt', '$numThem'";
 
 sql_insert('ARTICLE', $attributs, $values);
-
-// Récupérer l'ID de l'article nouvellement inséré
 $numArt = sql_select("ARTICLE", "MAX(numArt)")[0][0];
-
-// Associer les mots-clés à l'article dans la table MOTCLEARTICLE
 if ($numArt) {
     foreach ($motsClesSelectionnes as $numMotCle) {
         sql_insert("MOTCLEARTICLE", "numArt, numMotCle", "$numArt, $numMotCle");

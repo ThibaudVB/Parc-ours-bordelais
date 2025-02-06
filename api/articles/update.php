@@ -4,8 +4,8 @@ require_once '../../functions/ctrlSaisies.php';
 
 var_dump($_POST);
 
-$dtMajArt = date("Y-m-d H:i:s");  // Date de mise à jour
-$numArt = ctrlSaisies($_GET['numArt']); // ID de l'article à mettre à jour
+$dtMajArt = date("Y-m-d H:i:s");  
+$numArt = ctrlSaisies($_GET['numArt']); 
 $libTitrArt = ctrlSaisies($_POST['libTitrArt']);
 $libChapoArt = ctrlSaisies($_POST['libChapoArt']);
 $libAccrochArt = ctrlSaisies($_POST['libAccrochArt']);
@@ -18,14 +18,13 @@ $libConclArt = ctrlSaisies($_POST['libConclArt']);
 $numThem = ctrlSaisies($_POST['numThem']);
 $motsClesSelectionnes = isset($_POST['numMotCle']) ? $_POST['numMotCle'] : [];
 
-// Gestion de l'image (si une nouvelle image est uploadée)
 if (isset($_FILES['urlPhotArt']) && $_FILES['urlPhotArt']['size'] > 0) {
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/src/uploads/';
     $urlPhotArt = $_FILES['urlPhotArt']['name'];
     $uploadPath = $uploadDir . $urlPhotArt;
     move_uploaded_file($_FILES['urlPhotArt']['tmp_name'], $uploadPath);
 
-    // Mettre à jour l'article avec l'image
+    
     sql_update(
         "ARTICLE",
         "libTitrArt = '$libTitrArt',
@@ -43,7 +42,7 @@ if (isset($_FILES['urlPhotArt']) && $_FILES['urlPhotArt']['size'] > 0) {
         "numArt = '$numArt'"
     );
 } else {
-    // Mettre à jour l'article sans toucher à l'image
+    
     sql_update(
         "ARTICLE",
         "libTitrArt = '$libTitrArt',
@@ -61,15 +60,13 @@ if (isset($_FILES['urlPhotArt']) && $_FILES['urlPhotArt']['size'] > 0) {
     );
 }
 
-// Mise à jour des mots-clés associés à l'article
-// 1. Supprimer les anciens mots-clés de l'article
+
 sql_delete("MOTCLEARTICLE", "numArt = '$numArt'");
 
-// 2. Associer les nouveaux mots-clés sélectionnés
+
 foreach ($motsClesSelectionnes as $numMotCle) {
     sql_insert("MOTCLEARTICLE", "numArt, numMotCle", "'$numArt', '$numMotCle'");
 }
 
-// Redirection vers la liste des articles après mise à jour
 header('Location: ../../views/backend/articles/list.php');
 ?>
