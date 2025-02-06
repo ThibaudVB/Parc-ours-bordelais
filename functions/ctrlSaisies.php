@@ -7,7 +7,5 @@ function ctrlSaisies($saisie){
     $saisie = htmlspecialchars($saisie, ENT_QUOTES);
     // Suppression des espaces (ou d'autres caractères) en début et fin de chaîne
     $saisie = trim($saisie);
-    // Suppression des antislashs d'une chaîne
-    $saisie = stripslashes($saisie);
     return $saisie;
 }

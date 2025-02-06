@@ -74,7 +74,7 @@ $articles = sql_select("ARTICLE", "LibTitrArt, numArt");
                         </a>
                         <div class="post-entry-1-contents">
                             <h2><a href="article1.php?numArt=<?php echo $article['numArt']; ?>">
-                                <?php echo htmlspecialchars($article['LibTitrArt']); ?>
+                                <?php echo html_entity_decode($article['LibTitrArt']); ?>
                             </a></h2>
                             <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>

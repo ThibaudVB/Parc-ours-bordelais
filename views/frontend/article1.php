@@ -21,16 +21,16 @@ if (empty($article)) {
 }
 
 // Extraire les données de l'article
-$libTitrArt = htmlspecialchars($article[0]['libTitrArt']);
-$libChapoArt = htmlspecialchars($article[0]['libChapoArt']);
-$libAccrochArt = htmlspecialchars($article[0]['libAccrochArt']);
-$parag1Art = nl2br(htmlspecialchars($article[0]['parag1Art']));
-$libSsTitr1Art = htmlspecialchars($article[0]['libSsTitr1Art']);
-$parag2Art = nl2br(htmlspecialchars($article[0]['parag2Art']));
-$libSsTitr2Art = htmlspecialchars($article[0]['libSsTitr2Art']);
-$parag3Art = nl2br(htmlspecialchars($article[0]['parag3Art']));
-$libConclArt = nl2br(htmlspecialchars($article[0]['libConclArt']));
-$urlPhotArt = htmlspecialchars($article[0]['urlPhotArt']);
+$libTitrArt = html_entity_decode($article[0]['libTitrArt']);
+$libChapoArt = html_entity_decode($article[0]['libChapoArt']);
+$libAccrochArt = html_entity_decode($article[0]['libAccrochArt']);
+$parag1Art = nl2br(html_entity_decode($article[0]['parag1Art']));
+$libSsTitr1Art = html_entity_decode($article[0]['libSsTitr1Art']);
+$parag2Art = nl2br(html_entity_decode($article[0]['parag2Art']));
+$libSsTitr2Art = html_entity_decode($article[0]['libSsTitr2Art']);
+$parag3Art = nl2br(html_entity_decode($article[0]['parag3Art']));
+$libConclArt = nl2br(html_entity_decode($article[0]['libConclArt']));
+$urlPhotArt = html_entity_decode($article[0]['urlPhotArt']);
 ?>
 
 <!doctype html>
