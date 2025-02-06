@@ -2,20 +2,18 @@
 include '../../../header.php';
 
 $articles = sql_select('ARTICLE', '*');
-$membre = sql_select('MEMBRE', '*');
-$username = $_SESSION['username'];
+$membres = sql_select('MEMBRE', '*');
+$pseudoMemb = $_SESSION['pseudoMemb'];
 
-if(isset($username)){
-    $membre = sql_select("MEMBRE", "*", "pseudoMemb = '" . $username . "'");
 
-    $numMemb = $membre[0]['numMemb'];
+if(isset($pseudoMemb)){
+    $membre = sql_select("MEMBRE", "*", "pseudoMemb = '" . $pseudoMemb . "'");
+
     $prenomMemb = $membre[0]['prenomMemb'];
     $nomMemb = $membre[0]['nomMemb'];
-    $pseudoMemb = $membre[0]['pseudoMemb'];
+    $numMemb = $membre[0]['numMemb'];
 }
 
-//$prenomMemb = sql_select('MEMBRE', 'prenomMemb', 'pseudoMemb' == $username);
-//$nomMemb = sql_select('MEMBRE', 'nomMemb', 'pseudoMemb' == $username);
 
 ?>
 
@@ -30,10 +28,13 @@ if(isset($username)){
             <form action="<?php echo ROOT_URL . '/api/comments/create.php'; ?>" id="form-recaptcha" method="post"
                 enctype="multipart/form-data">
 
+                                <input id="numMemb" name="numMemb" class="form-control" style="display: none" type="text" value="<?php echo ($numMemb); ?>"/>
+
+
                 <p class="form-group">
-                    <label for="username">Pseudo</label>
-                    <input id="username" name="username" class="form-control" type="text"
-                        value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : "Veuillez vous connecter"; ?>"
+                    <label for="pseudoMemb">Pseudo</label>
+                    <input id="pseudoMemb" name="pseudoMemb" class="form-control" type="text"
+                        value="<?php echo isset($_SESSION['pseudoMemb']) ? $_SESSION['pseudoMemb'] : "Veuillez vous connecter"; ?>"
                         readonly>
                 </p>
 
@@ -67,14 +68,14 @@ if(isset($username)){
                 <br>
 
                 <div class="form-group">
-                    <textarea id="com" name="com" class="form-control" rows="6"
+                    <textarea id="libCom" name="libCom" class="form-control" type="text" rows="6"
                         placeholder="Saisissez votre commentaire" style="resize: vertical;"></textarea>
                 </div>
 
                 <br>
 
                 <?php
-                if (isset($_SESSION['pseudoMemb']) && isset($_SESSION['prenomMemb']) && isset($_SESSION['nomMemb']) && isset($_POST['numArt']) && isset($_POST['com'])):
+                if (isset($_SESSION['pseudoMemb'])):
                     ?>
                     <button class="btn btn-primary" type="submit">Postez</button>
                 <?php else: ?>
