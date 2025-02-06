@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
- 
+
 <?php
 // Démarrer la session seulement si elle n'est pas déjà active
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-var_dump($_SESSION);
+
 
 require_once 'config.php';
 $NumStat = sql_select("MEMBRE", "numStat");

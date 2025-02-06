@@ -30,7 +30,7 @@ foreach ($membres as $membre) {
                 </thead>
                 <tbody>
                     <?php foreach ($comments as $com) {
-                        if ($com['dtModCom'] === NULL) { ?>
+                        if ($com['dtModCom'] === NULL && $com['attModOK'] === 0) { ?>
                             <tr>
                                 <td>
                                     <?php
@@ -47,8 +47,7 @@ foreach ($membres as $membre) {
                                 <td><?php echo htmlspecialchars($com['libCom']); ?></td>
                                 <td>
                                     <a href="control.php?numCom=<?php echo ($com['numCom']); ?>" class="btn btn-primary" name="control">Control</a>
-                                    <a href="delete.php" class="btn btn-warning">Edit</a>
-                                </td>
+                                    </td>
                             </tr>
                         <?php }
                     } ?>
@@ -63,21 +62,20 @@ foreach ($membres as $membre) {
                         <th>Dernière modif</th>
                         <th>Contenu</th>
                         <th>Publication</th>
-                        <th>Raison Refus</th>
+
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($comments as $com) {
-                        if ($com['attModOK'] === 1) { ?>
+                        if ($com['attModOK'] == 1) { ?>
                             <tr>
                                 <td><?php echo isset($assoc[$com['numMemb']]) ? $assoc[$com['numMemb']] : "Inconnu"; ?></td>
                                 <td><?php echo ($com['dtModCom']); ?></td>
                                 <td><?php echo ($com['libCom']); ?></td>
                                 <td><?php echo str_replace([1, 0], ["oui", "refus"], $com['attModOK']); ?></td>
-                                <td><?php echo ($com['notifComKOAff']); ?></td>
                                 <td>
-                                    <a href="delete.php?numCom=<?php echo ($com['numCom']); ?>" class="btn btn-warning">Edit</a>
+                                <a href="edit.php?numCom=<?php echo ($com['numCom']); ?>&etat=controlés" class="btn btn-warning">Edit</a>
                                 </td>
                             </tr>
                         <?php }
@@ -99,7 +97,7 @@ foreach ($membres as $membre) {
                 </thead>
                 <tbody>
                     <?php foreach ($comments as $com) {
-                        if ($com['attModOK'] === 0 && $com['dtDelLogCom'] !== NULL) { ?>
+                        if ($com['notifComKOAff'] !== NULL && $com['attModOK'] == 0) { ?>
                             <tr>
                                 <td><?php echo isset($assoc[$com['numMemb']]) ? $assoc[$com['numMemb']] : "Inconnu"; ?></td>
                                 <td><?php echo ($com['dtDelLogCom']); ?></td>
@@ -107,7 +105,7 @@ foreach ($membres as $membre) {
                                 <td><?php echo str_replace([1, 0], ["oui", "refus"], $com['attModOK']); ?></td>
                                 <td><?php echo ($com['notifComKOAff']); ?></td>
                                 <td>
-                                    <a href="delete.php?numCom=<?php echo ($com['numCom']); ?>" class="btn btn-warning">Edit</a>
+                                <a href="edit.php?numCom=<?php echo ($com['numCom']); ?>&etat=supr_log" class="btn btn-warning">Edit</a>
                                 </td>
                             </tr>
                         <?php }
@@ -129,7 +127,7 @@ foreach ($membres as $membre) {
                 </thead>
                 <tbody>
                     <?php foreach ($comments as $com) {
-                        if ($com['attModOK'] === 0 && $com['dtDelLogCom'] !== NULL) { ?>
+                        if ($com['notifComKOAff'] !== NULL && $com['attModOK'] == 0) { ?>
                             <tr>
                                 <td><?php echo isset($assoc[$com['numMemb']]) ? $assoc[$com['numMemb']] : "Inconnu"; ?></td>
                                 <td><?php echo ($com['dtDelLogCom']); ?></td>

@@ -10,15 +10,22 @@ $numArt = ctrlSaisies($_POST['numArt']);
 $numMemb = ctrlSaisies($_POST['numMemb']);
 $dtModCom = ctrlSaisies($_POST['dtModCom']);
 $libCom = ctrlSaisies($_POST['libCom']);
+$numCom = ctrlSaisies($_POST['numCom']);
+$dtDelLogCom = ctrlSaisies($_POST['dtDelLogCom']);
 
 
+    $attributs = "attModOK = '$attModOK', 
+                notifComKOAff = '$notifComKOAff', 
+                numArt = '$numArt', 
+                numMemb = '$numMemb', 
+                dtModCom = '$dtModCom', 
+                libCom = '$libCom',
+                dtDelLogCom = '$dtDelLogCom'";
 
-$attributs = "attModOK, notifComKOAff, numArt, numMemb, dtModCom, libCom";
-$values = "'$attModOK', '$notifComKOAff', '$numArt', '$numMemb', '$dtModCom', '$libCom'";
 
-sql_insert('COMMENT', $attributs, $values);
+$where = "numCom = '$numCom'";
 
-
+sql_update('COMMENT', $attributs, $where);
 
 header('Location: ../../views/backend/comments/list.php');
 exit();

@@ -69,7 +69,7 @@ if(isset($pseudoMemb)){
 
                 <div class="form-group">
                     <textarea id="libCom" name="libCom" class="form-control" type="text" rows="6"
-                        placeholder="Saisissez votre commentaire" style="resize: vertical;"></textarea>
+                        placeholder="Saisissez votre commentaire" style="resize: vertical;" required></textarea>
                 </div>
 
                 <br>
