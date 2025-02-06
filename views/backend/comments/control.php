@@ -33,7 +33,7 @@ if (isset($_GET['numCom'])) {
     $libTitrArt = $article[0]['libTitrArt'];
 
     $dtModCom = date('Y-m-d H:i:s');
-
+    $dtDelLogCom = date('Y-m-d H:i:s');
 ?>
 
 
@@ -50,6 +50,8 @@ if (isset($_GET['numCom'])) {
                 <input id="numArt" name="numArt" class="form-control" style="display: none" type="text" value="<?php echo $numArt; ?>"/>
                 <input id="numMemb" name="numMemb" class="form-control" style="display: none" type="text" value="<?php echo $numMemb; ?>"/>
                 <input id="dtModCom" name="dtModCom" class="form-control" style="display: none" type="text" value="<?php echo $dtModCom; ?>"/>
+                <input id="numCom" name="numCom" class="form-control" style="display: none" type="text" value="<?php echo $numCom; ?>"/>
+                <input id="dtDelLogCom" name="dtDelLogCom" class="form-control" style="display: none" type="text" value="<?php echo $dtDelLogCom; ?>"/>
 
 
                 <p class="form-group">
@@ -80,40 +82,42 @@ if (isset($_GET['numCom'])) {
                         readonly>
                 </p>
 
-    <p class="form-group">
-        <label for="attModOK">Valider le commentaire ?</label><br>
-        <input type="radio" id="oui" name="attModOK" value="1">
-        <label for="oui">Oui</label><br>
-        <input type="radio" id="non" name="attModOK" value="0">
-        <label for="non">Non</label><br>
+                <p class="form-group">
+    <label for="attModOK">Montrer le commentaire ?</label><br>
+    <input type="radio" id="oui" name="attModOK" value="1">
+    <label for="oui">Oui</label><br>
+    <input type="radio" id="non" name="attModOK" value="0">
+    <label for="non">Non</label><br>
 
-        <textarea name="notifComKOAff" id="notifComKOAff" class="form-control" type="submit"
-            style="resize: vertical; display: none;" placeholder="Raison du refus"></textarea>
-    </p>
+    <textarea name="notifComKOAff" id="notifComKOAff" class="form-control" style="resize: vertical; display: <?php echo ($attModOK == 0 ? 'block' : 'none'); ?>" placeholder="Raison du refus" ></textarea>
+</p>
 
-<button type="submit" class="btn btn-warning">Contrôle
+
+<button type="submit" class="btn btn-warning">Contrôler
 </button>
-
 
 </form>
 
 <script>
-    const radioOui = document.getElementById('oui');
-    const radioNon = document.getElementById('non');
-    const raisRef = document.getElementById('notifComKOAff');
+const radioOui = document.getElementById('oui');
+const radioNon = document.getElementById('non');
+const raisRef = document.getElementById('notifComKOAff');
 
-    function cacherRais() {
-        if (radioNon.checked) {
-            raisRef.style.display = 'block';
-        } else {
-            raisRef.style.display = 'none';
-        }
+function cacherRais() {
+    if (radioNon.checked) {
+        raisRef.style.display = 'block';
+        raisRef.setAttribute('required', 'required');
+    } else {
+        raisRef.style.display = 'none';
+        raisRef.removeAttribute('required');
     }
+}
 
-    cacherRais()
+cacherRais();
+radioOui.addEventListener('change', cacherRais);
+radioNon.addEventListener('change', cacherRais);
 
-    radioOui.addEventListener('change', cacherRais)
-    radioNon.addEventListener('change', cacherRais)
 </script>
+
 
 <a href="/views/backend/comments/list.php" class="btn btn-primary">List</a>
