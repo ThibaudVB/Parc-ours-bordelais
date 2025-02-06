@@ -2,7 +2,6 @@
 session_start();
 include '../../../header.php';
 include '../../../config.php';
-var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>

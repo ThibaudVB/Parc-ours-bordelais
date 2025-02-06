@@ -1,5 +1,6 @@
 <?php
 include '../../../header.php'; // contains the header and call to config.php
+include __DIR__ . '/../../../perm/permission_admin.php';
 
 //Load all statuts
 $MotCle = sql_select("MOTCLE", "*");

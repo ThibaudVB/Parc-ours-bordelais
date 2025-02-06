@@ -1,5 +1,6 @@
 <?php
 include '../../../header.php';
+include __DIR__ . '/../../../perm/permission_admin.php';
 
 $membres = sql_select('MEMBRE', '*');
 $statuts = sql_select('STATUT', '*');
