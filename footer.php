@@ -38,8 +38,8 @@
                 <ul class="list-unstyled">
                   <li><a href="#">À propos de nous</a></li>
                   <li><a href="#">Avis</a></li>
-                  <li><a href="#">Conditions de service</a></li>
-                  <li><a href="#">Confidentialité</a></li>
+                  <li><a href="rgpd\rgpd.php">Conditions de service</a></li>
+                  <li><a href="rgpd\cgu.php">Confidentialité</a></li>
                   <li><a href="#">Contacter nous</a></li>
                 </ul>
               </div>

@@ -59,7 +59,8 @@ $urlPhotArt = html_entity_decode($articles[0]['urlPhotArt']);
             <div class="col-md-7">
               <h1 class="mb-3">Bienvenue sur notre blog</h1>
               <p>Le Studio Verdeaux vous souhaite une bonne lecture</p>
-              <p><a href="#" class="btn btn-success">En savoir plus</a></p>
+              <p><a href="#" class="btn btn-success" style="background-color: #409961; border-color: #409961;">En savoir plus</a></p>
+
             </div>
           </div>
         </div>

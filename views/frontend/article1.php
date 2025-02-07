@@ -3,6 +3,7 @@ require_once '../../header.php';
 require_once '../../config.php';
 
 
+
 // Vérifier si "numArt" est bien dans l'URL
 if (!isset($_GET['numArt']) || empty($_GET['numArt'])) {
   echo "Article introuvable.";
@@ -16,6 +17,10 @@ $numArt = intval($_GET['numArt']);
 $article = sql_select("ARTICLE", "*", "numArt = $numArt");
 $thematique = sql_select("THEMATIQUE", "*");
 $comments = sql_select("COMMENT", "*", "NumArt = $numArt ORDER BY dtCreaCom DESC");
+
+
+
+
 // var_dump($article); 
 
 // Vérifier si l'article existe
@@ -222,13 +227,13 @@ $motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAss
             </div>
 
 
-            <h3 class="mb-5"><?php echo count($comments); ?> Comments</h3>
+            <h3 class="mb-5">Commentaire</h3>
             <ul class="comment-list">
               <?php
               // Affichage dynamique des commentaires récupérés
               foreach ($comments as $comment) {
                 // Vérification de la condition avant d'afficher le commentaire
-                if ($comment['notifComKOAff'] !== NULL && $comment['attModOK'] == 0) {
+                if ($comment['attModOK'] == 1) {
                   // Récupération de chaque commentaire
                   $content = htmlspecialchars($comment['libCom']);
                   $date = date('F j, Y \a\t g:i a', strtotime($comment['dtCreaCom']));
@@ -355,14 +360,7 @@ $motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAss
             </div>
           </div>
           <div class="col-md-4 sidebar <svisibility: hidden;">
-            <div class="sidebar-box">
-              <form action="#" class="search-form">
-                <div class="form-group">
-                  <span class="icon fa fa-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-                </div>
-              </form>
-            </div>
+            
             <div class="sidebar-box">
               <div class="categories">
                 <h3>Catégories</h3>
@@ -379,19 +377,10 @@ $motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAss
             </div>
 
             <div class="author" style="voso>
-            <div class=" sidebar-box">
-              <h3 class="text-black">About The Author</h3>
-              <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life
-                One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World
-                of Grammar.</p>
+            <div class=" sidebar-box>
+              <h3 class="text-black">À propos de nous</h3>
+              <p>Une jeune équipe d'étudiants au sein de l'IUT Bordeaux Montaigne, nous sommes passionnés par la nature et la belle ville de Bordeaux.</p>
               <p><a href="#" class="btn btn-primary btn-md text-white">Read More</a></p>
-            </div>
-
-            <div class="sidebar-box">
-              <h3 class="text-black">Paragraph</h3>
-              <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of
-                her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line
-                Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
             </div>
           </div>
         </div>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-
 <?php
 // Démarrer la session seulement si elle n'est pas déjà active
 if (session_status() == PHP_SESSION_NONE) {
@@ -54,11 +53,11 @@ $NumStat = sql_select("MEMBRE", "numStat");
         }
 
         .navbar-brand:hover {
-            color: #006400 !important;
+            color: #409961 !important;
         }
 
         .navbar-nav .nav-link {
-            color: #f8f9fa !important;
+            color: #409961 !important;
             font-size: 1.1rem;
             margin-right: 15px;
             transition: color 0.3s ease-in-out;
@@ -100,13 +99,13 @@ $NumStat = sql_select("MEMBRE", "numStat");
         }
 
         .btn-primary {
-            background-color: #007bff !important;
-            border-color: #007bff !important;
+            background-color: #409961 !important;
+            border-color: #409961 !important;
         }
 
         .btn-primary:hover {
-            background-color: #0056b3 !important;
-            border-color: #004085 !important;
+            background-color:rgb(11, 63, 30) !important;
+            border-color: #409961 !important;
         }
 
         .btn-dark {

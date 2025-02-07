@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -22,5 +24,6 @@ $user = sql_select("MEMBRE", "*", "pseudoMemb = '$pseudo'");
         header('Location: /index.php');
         exit();
 }
+ob_end_flush();
 
 ?>
