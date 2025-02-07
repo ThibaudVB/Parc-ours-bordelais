@@ -4,7 +4,11 @@ if (!defined('ROOT')) {
     define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 }
 if (!defined('ROOT_URL')) {
-    define('ROOT_URL', 'http://' . $_SERVER['HTTP_HOST']);
+    if (strpos($_SERVER['HTTP_HOST'], 'scalingo') !== false) {
+        define('ROOT_URL', 'https://' . $_SERVER['HTTP_HOST']);
+        } else {
+        define('ROOT_URL', 'http://' . $_SERVER['HTTP_HOST']);
+        }
 }
 
 
