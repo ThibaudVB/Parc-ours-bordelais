@@ -39,11 +39,20 @@ foreach ($thematique as $them) {
                 <tbody>
                     <?php foreach ($article as $article) {
 
-                        if (isset($article['numMotCle']) && isset($motCleAssoc[$article['numMotCle']])) {
-                            $motCleLib = $motCleAssoc[$article['numMotCle']];
-                        } else {
-                            $motCleLib = 'Non attibué';
-                        }
+                      // Récupérer les mots-clés associés à l'article via la table MOTCLEARTICLE
+$motsClesAssocies = sql_select(
+    "MOTCLEARTICLE INNER JOIN MOTCLE ON MOTCLEARTICLE.numMotCle = MOTCLE.numMotCle",
+    "MOTCLE.libMotCle",
+    "MOTCLEARTICLE.numArt = " . intval($article['numArt'])
+);
+
+// Vérifier si des mots-clés existent
+if (!empty($motsClesAssocies)) {
+    $motCleLib = implode(', ', array_column($motsClesAssocies, 'libMotCle'));
+} else {
+    $motCleLib = 'Non attribué';
+}
+
 
                         if (isset($article['numThem']) && isset($thematiqueAssoc[$article['numThem']])) {
                             $thematiqueLib = $thematiqueAssoc[$article['numThem']];

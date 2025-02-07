@@ -121,40 +121,16 @@ $motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAss
 
 
     <div class="ftco-blocks-cover-1">
-    <style>
-        /* CSS pour l'image dans le div */
-        .ftco-cover-1.innerpage.overlay img {
-            width: 100%; /* L'image occupe toute la largeur de son conteneur */
-            height: auto; /* L'image conserve ses proportions */
-            object-fit: cover; /* L'image remplit le conteneur sans être déformée */
-            max-height: 80vh; /* Limite la hauteur de l'image à 80% de la hauteur de la fenêtre */
-        }
-
-        /* CSS pour le texte */
-        .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .ftco-cover-1 .text-center {
-            color: white; /* Texte en blanc */
-        }
-    </style>
-</head>
-<body>
-
-<div class="ftco-cover-1 innerpage overlay">
-    <!-- Image de l'article -->
-    <img src="../../src/uploads/<?php echo $urlPhotArt; ?>" alt="Image de l'article">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
+      <div class="ftco-cover-1 innerpage overlay" style="background-image: url('img/parc_bordeaux.jpg')">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
             <div class="col-lg-6 text-center">
-                <span class="d-block mb-3 text-white" data-aos="fade-up">July 17, 2019 <span class="mx-2 text-primary">&bullet;</span> by James Miller</span>
+              <span class="d-block mb-3 text-white" data-aos="fade-up">July 17, 2019 <span class="mx-2 text-primary">&bullet;</span> by James Miller</span>
                 <h1 class="mb-4" data-aos="fade-up" data-aos-delay="100">Single Blog Posts Title</h1>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
     </div>
     <div class="site-section">
       <div class="container-fluid mt-4">
@@ -188,63 +164,106 @@ $motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAss
             <br>
 
 
-
-
             <div class="pt-5">
               <p>Catégories:  <a href=""><?php echo $thematiqueLib; ?></a>, Mots Clés <a href="#"><?php echo $motCleLib ?></a>, <a href="#">#trends</a></p>
             </div>
 
 
-    <h3 class="mb-5"><?php echo count($comments); ?> Comments</h3>
-    <ul class="comment-list">
-        <?php
-        // Affichage dynamique des commentaires récupérés
-        foreach ($comments as $comment) {
-            // Récupération de chaque commentaire
-            $content = htmlspecialchars($comment['libCom']);
-            $date = date('F j, Y \a\t g:i a', strtotime($comment['dtCreaCom']));
-        ?>
-            <li class="comment">
-                <div class="comment-body">
-                    <h3>Anonymous</h3>
-                    <div class="meta"><?php echo $date; ?></div>
-                    <p><?php echo $content; ?></p>
+            <div class="pt-5">
+              <h3 class="mb-5">6 Comments</h3>
+              <ul class="comment-list">
+                <li class="comment">
+                  <div class="comment-body">
+                    <h3>Jacob Smith</h3>
+                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
                     <p><a href="#" class="reply">Reply</a></p>
-                </div>
-            </li>
-        <?php
-        }
-        ?>
-    </ul>
-    <!-- END comment-list -->
-    
-    <div class="comment-form-wrap pt-5">
-        <h3 class="mb-5">Leave a comment</h3>
-        <form action="#" class="">
-            <div class="form-group">
-                <label for="name">Name *</label>
-                <input type="text" class="form-control" id="name">
-            </div>
-            <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-                <label for="website">Website</label>
-                <input type="url" class="form-control" id="website">
+                  </div>
+                </li>
+
+                <li class="comment">
+                  <div class="comment-body">
+                    <h3>Chris Meyer</h3>
+                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <p><a href="#" class="reply">Reply</a></p>
+                  </div>
+
+                  
+                    <li class="comment">
+                      <div class="comment-body">
+                        <h3>Chintan Patel</h3>
+                        <div class="meta">January 9, 2018 at 2:21pm</div>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                        <p><a href="#" class="reply">Reply</a></p>
+                      </div>
+
+
+                      
+                        <li class="comment">
+                          <div class="comment-body">
+                            <h3>Jean Doe</h3>
+                            <div class="meta">January 9, 2018 at 2:21pm</div>
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                            <p><a href="#" class="reply">Reply</a></p>
+                          </div>
+
+                            
+                              <li class="comment">
+                                <div class="comment-body">
+                                  <h3>Ben Afflick</h3>
+                                  <div class="meta">January 9, 2018 at 2:21pm</div>
+                                  <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                                  <p><a href="#" class="reply">Reply</a></p>
+                                </div>
+                              </li>
+                            
+                        </li>
+                      
+                    </li>
+                  
+                </li>
+
+                <li class="comment">
+                  <div class="comment-body">
+                    <h3>Jean Doe</h3>
+                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                    <p><a href="#" class="reply">Reply</a></p>
+                  </div>
+                </li>
+              </ul>
+              <!-- END comment-list -->
+              
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5">Leave a comment</h3>
+                <form action="#" class="">
+                  <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="website">Website</label>
+                    <input type="url" class="form-control" id="website">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn btn-primary btn-md text-white">
+                  </div>
+
+                </form>
+              </div>
             </div>
 
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Post Comment" class="btn btn-primary btn-md text-white">
-            </div>
-
-        </form>
-    </div>
-</div>
+          </div>
           <div class="col-md-4 sidebar <svisibility: hidden;">
             <div class="sidebar-box">
               <form action="#" class="search-form">
@@ -269,7 +288,7 @@ $motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAss
     </div>
 </div>
 
-            <div class="author" style="voso>
+            <div class="author">
             <div class="sidebar-box">
               <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid mb-4 w-50 rounded-circle">
               <h3 class="text-black">About The Author</h3>
@@ -289,10 +308,52 @@ $motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAss
 
 
 
-   <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/footer.php';
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <img src="images/img_1.jpg" alt="Image" class="img-fluid mb-5">
+            <h2 class="footer-heading mb-3">About Us</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+          </div>
+          <div class="col-lg-8 ml-auto">
+            <div class="row">
+              <div class="col-lg-6 ml-auto">
+                <h2 class="footer-heading mb-4">Quick Links</h2>
+                <ul class="list-unstyled">
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Testimonials</a></li>
+                  <li><a href="#">Terms of Service</a></li>
+                  <li><a href="#">Privacy</a></li>
+                  <li><a href="#">Contact Us</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <h2 class="footer-heading mb-4">Newsletter</h2>
+                <form action="#" class="d-flex" class="subscribe">
+                  <input type="text" class="form-control mr-3" placeholder="Email">
+                  <input type="submit" value="Send" class="btn btn-primary">
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <div class="border-top pt-5">
+              <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+            </div>
+          </div>
 
-?>
+        </div>
+      </div>
+    </footer>
+
     </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>

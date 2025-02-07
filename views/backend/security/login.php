@@ -29,7 +29,7 @@ include '../../../config.php';
                 </div>
 
                 <button type="submit" 
-                    style="width: 100%; background-color: #4CAF50; color: white; padding: 15px; font-size: 18px; border: none; border-radius: 6px; cursor: pointer;">
+                    style="width: 100%; background-color: #006400; color: white; padding: 15px; font-size: 18px; border: none; border-radius: 6px; cursor: pointer;">
                     Se connecter
                 </button>
             </form>

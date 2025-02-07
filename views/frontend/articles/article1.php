@@ -1,6 +1,7 @@
 <?php
-require_once '../../../header.php';
-require_once '../../../config.php';
+require_once '../../header.php';
+require_once '../../config.php';
+
 
 // Vérifier si "numArt" est bien dans l'URL
 if (!isset($_GET['numArt']) || empty($_GET['numArt'])) {
@@ -13,6 +14,9 @@ $numArt = intval($_GET['numArt']);
 
 // Récupérer l'article correspondant depuis la BDD
 $article = sql_select("ARTICLE", "*", "numArt = $numArt");
+$thematique = sql_select("THEMATIQUE", "*");
+$comments = sql_select("COMMENT", "*", "NumArt = $numArt ORDER BY dtCreaCom DESC");
+// var_dump($article); 
 
 // Vérifier si l'article existe
 if (empty($article)) {
@@ -31,7 +35,45 @@ $libSsTitr2Art = html_entity_decode($article[0]['libSsTitr2Art']);
 $parag3Art = nl2br(html_entity_decode($article[0]['parag3Art']));
 $libConclArt = nl2br(html_entity_decode($article[0]['libConclArt']));
 $urlPhotArt = html_entity_decode($article[0]['urlPhotArt']);
-?>
+
+
+$thematiqueAssoc = [];
+foreach ($thematique as $them) {
+    $thematiqueAssoc[$them['numThem']] = $them['libThem'];
+}
+
+if (isset($article[0]['numThem']) && isset($thematiqueAssoc[$article[0]['numThem']])) {
+  $thematiqueLib = $thematiqueAssoc[$article[0]['numThem']];
+} else {
+  $thematiqueLib = 'Non attribué';}
+
+  // Récupérer numArt depuis l'URL
+$numArt = isset($_GET['numArt']) ? intval($_GET['numArt']) : 0;
+
+// Vérifier que l'article existe
+$article = sql_select("ARTICLE", "*", "numArt = $numArt");
+if (empty($article)) {
+    echo "Article non trouvé.";
+    exit;
+}
+
+// Récupérer les mots-clés associés à l'article
+$motsClesAssocies = sql_select(
+    "MOTCLEARTICLE INNER JOIN MOTCLE ON MOTCLEARTICLE.numMotCle = MOTCLE.numMotCle",
+    "MOTCLE.libMotCle",
+    "MOTCLEARTICLE.numArt = $numArt"
+);
+
+// Transformer les résultats en texte
+$motCleLib = !empty($motsClesAssocies) ? implode(', ', array_column($motsClesAssocies, 'libMotCle')) : 'Non attribué';
+
+  ?>
+  
+
+
+
+
+
 
 <!doctype html>
 <html lang="fr">
@@ -90,148 +132,94 @@ $urlPhotArt = html_entity_decode($article[0]['urlPhotArt']);
         </div>
       </div>
     </div>
-
     <div class="site-section">
-      <div class="container">
+      <div class="container-fluid mt-4">
         <div class="row">
           <div class="col-md-8 blog-content">
-            <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+          <p class="lead" style="font-size: 4rem !important; font-weight: bold !important; text-align: center !important;">
+    <?php echo $libTitrArt; ?>
+</p>
+<br>
+            <p style="font-size: 2rem !important;  text-align: center !important; font-style: italic !important;"><?php echo $libChapoArt; ?></p>
+            <br>
+            <blockquote><p style="font-size: 2rem !important;  text-align: center !important; font-weight: bold !important;"><?php echo $libAccrochArt; ?></p></blockquote>
+            <br>
 
-            <blockquote><p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p></blockquote>
+            <p style="font-size: 1.5rem !important;  text-align: center !important;"><?php echo $parag1Art; ?></p>
+            <br>
 
-            <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+            <p style="font-size: 2rem !important;  text-align: center !important; font-weight: bold !important;"><?php echo $libSsTitr1Art; ?></p>
+            <br>
 
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <p style="font-size: 1.5rem !important;  text-align: center !important;"><?php echo $parag2Art; ?></p>
+            <br>
 
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+            <blockquote><p style="font-size: 2rem !important;  text-align: center !important; font-weight: bold !important;"><?php echo $libSsTitr2Art; ?></p></blockquote>
+            <br>
 
-            <blockquote><p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p></blockquote>
-
-            <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+            <p style="font-size: 1.5rem !important;  text-align: center !important;"><?php echo $parag3Art; ?></p>
+            <br>
             
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <p style="font-size: 2rem !important;  text-align: center !important; font-weight: bold !important; font-style: italic !important;"><?php echo $libConclArt; ?></p>
+            <br>
 
 
             <div class="pt-5">
-              <p>Categories:  <a href="#">Design</a>, <a href="#">Events</a>  Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
+              <p>Catégories:  <a href=""><?php echo $thematiqueLib; ?></a>, Mots Clés <a href="#"><?php echo $motCleLib ?></a>, <a href="#">#trends</a></p>
             </div>
 
 
-            <div class="pt-5">
-              <h3 class="mb-5">6 Comments</h3>
-              <ul class="comment-list">
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_2.jpg" alt="Free Website Template by Free-Template.co">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jacob Smith</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+    <h3 class="mb-5"><?php echo count($comments); ?> Comments</h3>
+    <ul class="comment-list">
+        <?php
+        // Affichage dynamique des commentaires récupérés
+        foreach ($comments as $comment) {
+            // Récupération de chaque commentaire
+            $content = htmlspecialchars($comment['libCom']);
+            $date = date('F j, Y \a\t g:i a', strtotime($comment['dtCreaCom']));
+        ?>
+            <li class="comment">
+                <div class="comment-body">
+                    <h3>Anonymous</h3>
+                    <div class="meta"><?php echo $date; ?></div>
+                    <p><?php echo $content; ?></p>
                     <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
-
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_3.jpg" alt="Free Website Template by Free-Template.co">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Chris Meyer</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-
-                  <ul class="children">
-                    <li class="comment">
-                      <div class="vcard bio">
-                        <img src="images/person_5.jpg" alt="Free Website Template by Free-Template.co">
-                      </div>
-                      <div class="comment-body">
-                        <h3>Chintan Patel</h3>
-                        <div class="meta">January 9, 2018 at 2:21pm</div>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                        <p><a href="#" class="reply">Reply</a></p>
-                      </div>
-
-
-                      <ul class="children">
-                        <li class="comment">
-                          <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co">
-                          </div>
-                          <div class="comment-body">
-                            <h3>Jean Doe</h3>
-                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                            <p><a href="#" class="reply">Reply</a></p>
-                          </div>
-
-                            <ul class="children">
-                              <li class="comment">
-                                <div class="vcard bio">
-                                  <img src="images/person_4.jpg" alt="Free Website Template by Free-Template.co">
-                                </div>
-                                <div class="comment-body">
-                                  <h3>Ben Afflick</h3>
-                                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                                  <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                                  <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                              </li>
-                            </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
-              </ul>
-              <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn btn-primary btn-md text-white">
-                  </div>
-
-                </form>
-              </div>
+                </div>
+            </li>
+        <?php
+        }
+        ?>
+    </ul>
+    <!-- END comment-list -->
+    
+    <div class="comment-form-wrap pt-5">
+        <h3 class="mb-5">Leave a comment</h3>
+        <form action="#" class="">
+            <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input type="url" class="form-control" id="website">
             </div>
 
-          </div>
-          <div class="col-md-4 sidebar">
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Post Comment" class="btn btn-primary btn-md text-white">
+            </div>
+
+        </form>
+    </div>
+</div>
+          <div class="col-md-4 sidebar <svisibility: hidden;">
             <div class="sidebar-box">
               <form action="#" class="search-form">
                 <div class="form-group">
@@ -241,15 +229,21 @@ $urlPhotArt = html_entity_decode($article[0]['urlPhotArt']);
               </form>
             </div>
             <div class="sidebar-box">
-              <div class="categories">
-                <h3>Categories</h3>
-                <li><a href="#">Creatives <span>(12)</span></a></li>
-                <li><a href="#">News <span>(22)</span></a></li>
-                <li><a href="#">Design <span>(37)</span></a></li>
-                <li><a href="#">HTML <span>(42)</span></a></li>
-                <li><a href="#">Web Development <span>(14)</span></a></li>
-              </div>
-            </div>
+    <div class="categories">
+        <h3>Catégories</h3>
+        <ul>
+            <?php foreach ($thematique as $them): ?>
+                <li>
+                    <a href="articles_par_thematique.php?numThem=<?= $them['numThem']; ?>">
+                        <?= htmlspecialchars($them['libThem']); ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+
+            <div class="author" style="voso>
             <div class="sidebar-box">
               <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid mb-4 w-50 rounded-circle">
               <h3 class="text-black">About The Author</h3>
@@ -264,6 +258,7 @@ $urlPhotArt = html_entity_decode($article[0]['urlPhotArt']);
           </div>
         </div>
       </div>
+    </div>
     </div>
 
 

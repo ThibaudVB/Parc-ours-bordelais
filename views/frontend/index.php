@@ -1,8 +1,12 @@
 <?php
 require_once '../../header.php';
 require_once '../../config.php';
+setlocale(LC_TIME, 'fr_FR.UTF-8', 'fra'); // Définit la locale en français
 //sql_connect();
-$articles = sql_select("ARTICLE", "LibTitrArt, numArt");
+$articles = sql_select("ARTICLE", "LibTitrArt, numArt, dtCreaArt, libChapoArt, urlPhotArt");
+$urlPhotArt = html_entity_decode($articles[0]['urlPhotArt']);
+
+
 //echo ("Evénement");
 ?>
 
@@ -62,183 +66,43 @@ $articles = sql_select("ARTICLE", "LibTitrArt, numArt");
       </div>
     </div>
 
-    <div class="site-section bg-light">
-    <div class="container">
+    <div class="site-section bg-light" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between;">
+    <div class="container" style="flex-grow: 1;">
         <div class="row">
 
-            <?php foreach ($articles as $article) : ?>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="post-entry-1 h-100">
-                        <a href="article1.php?numArt=<?php echo $article['numArt']; ?>">
-                            <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
-                        </a>
-                        <div class="post-entry-1-contents">
-                            <h2><a href="article1.php?numArt=<?php echo $article['numArt']; ?>">
-                                <?php echo html_entity_decode($article['LibTitrArt']); ?>
-                            </a></h2>
-                            <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a href="#">Admin</a></span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias consectetur.</p>
-                        </div>
-                    </div>
+        <?php foreach ($articles as $article) : ?>
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="post-entry-1 h-100" style="height: 100%; display: flex; flex-direction: column;">
+            <a href="article1.php?numArt=<?php echo $article['numArt']; ?>">
+                <div class="test" style="height: 100%; display: flex; flex-direction: column;">
+                    <!-- Utilisation de $article['urlPhotArt'] pour afficher l'image -->
+                    <img src="../../src/uploads/<?php echo $article['urlPhotArt']; ?>" alt="Image de l'article">
                 </div>
-            <?php endforeach; ?>
+            </a>
+            <div class="post-entry-1-contents" style="flex-grow: 1;">
+                <h2><a href="article1.php?numArt=<?php echo $article['numArt']; ?>">
+                    <?php echo html_entity_decode($article['LibTitrArt']); ?>
+                </a></h2>
+                <span class="meta d-inline-block mb-3">
+                    <?php echo date("d F Y", strtotime($article['dtCreaArt'])); ?> 
+                    <span class="mx-2">by</span> <a href="#">Admin</a>
+                </span>
+                <p><?php echo html_entity_decode($article['libChapoArt']); ?></p>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
 
         </div>
     </div>
 </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="post-entry-1 h-100">
-              <a href="actors.php">
-                <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-entry-1-contents">
 
-                <h2><a href="actors.php">L'histoire d'Enzo</a></h2>
-                <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a
-                    href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias
-                  consectetur.</p>
-              </div>
-            </div>
-          </div>
+  <?php
 
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="post-entry-1 h-100">
-              <a href="single.html">
-                <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-entry-1-contents">
+include $_SERVER['DOCUMENT_ROOT'] . '/footer.php';
 
-                <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a
-                    href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias
-                  consectetur.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="post-entry-1 h-100">
-              <a href="single.html">
-                <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-entry-1-contents">
-
-                <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a
-                    href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias
-                  consectetur.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="post-entry-1 h-100">
-              <a href="single.html">
-                <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-entry-1-contents">
-
-                <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a
-                    href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias
-                  consectetur.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="post-entry-1 h-100">
-              <a href="single.html">
-                <img src="img/arbre_en_fete.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-entry-1-contents">
-
-                <h2><a href="single.html">Lorem ipsum dolor sit amet</a></h2>
-                <span class="meta d-inline-block mb-3">July 17, 2019 <span class="mx-2">by</span> <a
-                    href="#">Admin</a></span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eos soluta, dolore harum molestias
-                  consectetur.</p>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-12 mt-5 text-center">
-            <span class="p-3">1</span>
-            <a href="#" class="p-3">2</a>
-            <a href="#" class="p-3">3</a>
-            <a href="#" class="p-3">4</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <div class="site-section section-3" data-stellar-background-ratio="0.5"
-      style="background-image: url('images/hero_1.jpg');">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-7 text-center mb-5">
-            <h2 class="text-white scissors primary-color-icon text-center">Quality Haircut</h2>
-            <p class="lead text-white mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam quo
-              doloribus, suscipit libero, voluptate aliquam.</p>
-            <p><a href="#" class="btn btn-primary">Contact Us Now</a></p>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <img src="images/img_1.jpg" alt="Image" class="img-fluid mb-5">
-            <h2 class="footer-heading mb-3">About Us</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-              blind texts. </p>
-          </div>
-          <div class="col-lg-8 ml-auto">
-            <div class="row">
-              <div class="col-lg-6 ml-auto">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Terms of Service</a></li>
-                  <li><a href="#">Privacy</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <h2 class="footer-heading mb-4">Newsletter</h2>
-                <form action="#" class="d-flex" class="subscribe">
-                  <input type="text" class="form-control mr-3" placeholder="Email">
-                  <input type="submit" value="Send" class="btn btn-primary">
-                </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <div class="border-top pt-5">
-              <p>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;
-                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
-                with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                  target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </footer>
+  ?>
 
   </div>
 

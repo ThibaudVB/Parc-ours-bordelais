@@ -171,3 +171,10 @@ if (isset($_GET['libThem'])) {
         </div>
     </div>
 </div>
+
+<?php
+
+include $_SERVER['DOCUMENT_ROOT'] . '/footer.php';
+
+  ?>
+
